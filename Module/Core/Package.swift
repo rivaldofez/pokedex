@@ -11,11 +11,19 @@ let package = Package(
             name: "Core",
             targets: ["Core"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/realm/realm-swift", branch: "master"),
+        .package(url: "https://github.com/Alamofire/Alamofire", .upToNextMajor(from: "5.9.1")),
+        .package(url: "https://github.com/ReactiveX/RxSwift", .upToNextMajor(from: "6.6.0")),
+    ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Core"),
+            name: "Core",
+            dependencies: [
+                .product(name: "RealmSwift", package: "realm-swift"),
+                .product(name: "Alamofire", package: "Alamofire"),
+                .product(name: "RxSwift", package: "RxSwift"),
+            ]),
         .testTarget(
             name: "CoreTests",
             dependencies: ["Core"]),
