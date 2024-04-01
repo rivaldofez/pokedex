@@ -11,6 +11,9 @@
 		59A196102BBB1FB3004F5DAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A1960D2BBB1FB3004F5DAC /* AppDelegate.swift */; };
 		59A196112BBB1FB3004F5DAC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A1960E2BBB1FB3004F5DAC /* SceneDelegate.swift */; };
 		59A196142BBB1FBD004F5DAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59A196122BBB1FBD004F5DAC /* Assets.xcassets */; };
+		59A1961F2BBB2038004F5DAC /* error.json in Resources */ = {isa = PBXBuildFile; fileRef = 59A1961C2BBB2037004F5DAC /* error.json */; };
+		59A196202BBB2038004F5DAC /* empty.json in Resources */ = {isa = PBXBuildFile; fileRef = 59A1961D2BBB2037004F5DAC /* empty.json */; };
+		59A196212BBB2038004F5DAC /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 59A1961E2BBB2038004F5DAC /* loading.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +23,9 @@
 		59A1960D2BBB1FB3004F5DAC /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59A1960E2BBB1FB3004F5DAC /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		59A196122BBB1FBD004F5DAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		59A1961C2BBB2037004F5DAC /* error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = error.json; sourceTree = "<group>"; };
+		59A1961D2BBB2037004F5DAC /* empty.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = empty.json; sourceTree = "<group>"; };
+		59A1961E2BBB2038004F5DAC /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,11 +79,22 @@
 		59A196132BBB1FBD004F5DAC /* Asset */ = {
 			isa = PBXGroup;
 			children = (
+				59A196152BBB1FED004F5DAC /* Lottie */,
 				59A196122BBB1FBD004F5DAC /* Assets.xcassets */,
 			);
 			name = Asset;
 			path = Pokedex/Asset;
 			sourceTree = SOURCE_ROOT;
+		};
+		59A196152BBB1FED004F5DAC /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				59A1961D2BBB2037004F5DAC /* empty.json */,
+				59A1961C2BBB2037004F5DAC /* error.json */,
+				59A1961E2BBB2038004F5DAC /* loading.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -142,8 +159,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59A1961F2BBB2038004F5DAC /* error.json in Resources */,
+				59A196202BBB2038004F5DAC /* empty.json in Resources */,
 				59A196142BBB1FBD004F5DAC /* Assets.xcassets in Resources */,
 				5968656E2BBA893000E8A6B6 /* Base in Resources */,
+				59A196212BBB2038004F5DAC /* loading.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
