@@ -11,7 +11,7 @@ import Alamofire
 import RxSwift
 
 
-public struct GeneralPokemonRemoteDataSource: RemoteDataSource {
+public struct PokemonRemoteDataSource: RemoteDataSource {
     private let disposeBag = DisposeBag()
     
     public typealias Request = Int
