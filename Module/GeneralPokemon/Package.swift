@@ -17,7 +17,7 @@ let package = Package(
         .package(url: "https://github.com/realm/realm-swift.git", branch: "master"),
         .package(url: "https://github.com/Alamofire/Alamofire.git", branch: "master"),
         .package(url: "https://github.com/ReactiveX/RxSwift.git", branch: "main"),
-        .package(url: "https://github.com/rivaldofez/PokepediaCore.git", branch: "main")
+        .package(path: "../Core")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -28,7 +28,7 @@ let package = Package(
                 .product(name: "RealmSwift", package: "realm-swift"),
                 .product(name: "Alamofire", package: "Alamofire"),
                 .product(name: "RxSwift", package: "RxSwift"),
-                .product(name: "PokepediaCore", package: "PokepediaCore"),
+                .product(name: "Core", package: "Core"),
             ]),
         .testTarget(
             name: "GeneralPokemonTests",
