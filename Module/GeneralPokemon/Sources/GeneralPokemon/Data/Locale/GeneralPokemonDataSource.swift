@@ -37,5 +37,23 @@ public struct PokemonLocaleDataSource: LocaleDataSource {
         }
     }
     
-   
+    public func inserts(entities: [PokemonEntity]) -> Observable<Bool> {
+        return Observable<Bool>.create { observer in
+            do {
+                try _realm.write {
+                    for entity in entities {
+                        _realm.add(entity, update: .all)
+                    }
+                }
+                observer.onNext(true)
+                observer.onCompleted()
+            } catch {
+                observer.onError(DatabaseError.invalidInstance)
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    
 }
