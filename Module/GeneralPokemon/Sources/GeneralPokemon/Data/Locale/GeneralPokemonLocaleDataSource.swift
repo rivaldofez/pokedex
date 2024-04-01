@@ -10,7 +10,7 @@ import Core
 import RealmSwift
 import RxSwift
 
-public struct PokemonLocaleDataSource: LocaleDataSource {
+public struct GeneralPokemonLocaleDataSource: LocaleDataSource {
 
     
     public typealias Request = Int
