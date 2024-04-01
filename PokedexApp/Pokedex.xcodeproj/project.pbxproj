@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5910D84A2BBAE6A100DEA3D5 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 5910D8492BBAE6A100DEA3D5 /* Core */; };
 		596865622BBA892D00E8A6B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596865612BBA892D00E8A6B6 /* AppDelegate.swift */; };
 		596865642BBA892D00E8A6B6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596865632BBA892D00E8A6B6 /* SceneDelegate.swift */; };
 		596865662BBA892D00E8A6B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596865652BBA892D00E8A6B6 /* ViewController.swift */; };
@@ -31,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5910D84A2BBAE6A100DEA3D5 /* Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +85,9 @@
 			dependencies = (
 			);
 			name = pokedex;
+			packageProductDependencies = (
+				5910D8492BBAE6A100DEA3D5 /* Core */,
+			);
 			productName = pokedex;
 			productReference = 5968655E2BBA892D00E8A6B6 /* pokedex.app */;
 			productType = "com.apple.product-type.application";
@@ -102,7 +107,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 596865592BBA892D00E8A6B6 /* Build configuration list for PBXProject "pokedex" */;
+			buildConfigurationList = 596865592BBA892D00E8A6B6 /* Build configuration list for PBXProject "Pokedex" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -111,6 +116,9 @@
 				Base,
 			);
 			mainGroup = 596865552BBA892D00E8A6B6;
+			packageReferences = (
+				5910D8482BBAE6A100DEA3D5 /* XCLocalSwiftPackageReference "../Module/Core" */,
+			);
 			productRefGroup = 5968655F2BBA892D00E8A6B6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -292,6 +300,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3F8C4P2T95;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pokedex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -319,6 +328,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3F8C4P2T95;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pokedex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -342,7 +352,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		596865592BBA892D00E8A6B6 /* Build configuration list for PBXProject "pokedex" */ = {
+		596865592BBA892D00E8A6B6 /* Build configuration list for PBXProject "Pokedex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				596865702BBA893000E8A6B6 /* Debug */,
@@ -361,6 +371,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		5910D8482BBAE6A100DEA3D5 /* XCLocalSwiftPackageReference "../Module/Core" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Module/Core;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5910D8492BBAE6A100DEA3D5 /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Core;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 596865562BBA892D00E8A6B6 /* Project object */;
 }
