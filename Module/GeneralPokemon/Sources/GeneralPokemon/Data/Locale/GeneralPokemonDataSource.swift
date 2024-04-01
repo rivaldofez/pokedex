@@ -55,5 +55,50 @@ public struct PokemonLocaleDataSource: LocaleDataSource {
         }
     }
     
+    public func insert(entity: PokemonEntity) -> Observable<Bool> {
+        return Observable<Bool>.create { observer in
+            do {
+                try _realm.write {
+                    _realm.add(entity, update: .all)
+                }
+                observer.onNext(true)
+                observer.onCompleted()
+            } catch {
+                observer.onError(DatabaseError.invalidInstance)
+            }
+            
+            return Disposables.create()
+        }
+    }
     
+    
+    public func get(id: Int) -> Observable<PokemonEntity?> {
+        return Observable<PokemonEntity?>.create { observer in
+            let pokeList: Results<PokemonEntity> = {
+                _realm.objects(PokemonEntity.self)
+                    .where { $0.id == id }
+            }()
+            
+            observer.onNext(pokeList.toArray(ofType: PokemonEntity.self).first)
+            observer.onCompleted()
+            
+            return Disposables.create()
+        }
+    }
+    
+    public func update(entity: PokemonEntity) -> Observable<Bool> {
+        return Observable<Bool>.create { observer in
+            do {
+                try _realm.write {
+                    _realm.add(entity, update: .modified)
+                }
+                observer.onNext(true)
+                observer.onCompleted()
+            } catch {
+                observer.onError(DatabaseError.invalidInstance)
+            }
+            
+            return Disposables.create()
+        }
+    }
 }
