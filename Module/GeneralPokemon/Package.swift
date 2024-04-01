@@ -11,11 +11,25 @@ let package = Package(
             name: "GeneralPokemon",
             targets: ["GeneralPokemon"]),
     ],
+    dependencies: [
+        // Dependencies declare other packages that this package depends on.
+        // .package(url: /* package url */, from: "1.0.0"),
+        .package(url: "https://github.com/realm/realm-swift.git", branch: "master"),
+        .package(url: "https://github.com/Alamofire/Alamofire.git", branch: "master"),
+        .package(url: "https://github.com/ReactiveX/RxSwift.git", branch: "main"),
+        .package(url: "https://github.com/rivaldofez/PokepediaCore.git", branch: "main")
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "GeneralPokemon"),
+            name: "GeneralPokemon",
+            dependencies: [
+                .product(name: "RealmSwift", package: "realm-swift"),
+                .product(name: "Alamofire", package: "Alamofire"),
+                .product(name: "RxSwift", package: "RxSwift"),
+                .product(name: "PokepediaCore", package: "PokepediaCore"),
+            ]),
         .testTarget(
             name: "GeneralPokemonTests",
             dependencies: ["GeneralPokemon"]),
