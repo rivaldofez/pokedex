@@ -22,6 +22,9 @@
 		591C305E2BBB924A005A5A5B /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C305D2BBB924A005A5A5B /* AboutTableViewCell.swift */; };
 		591C30602BBB9464005A5A5B /* BaseStatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C305F2BBB9464005A5A5B /* BaseStatTableViewCell.swift */; };
 		591C30632BBB94B0005A5A5B /* BaseStatSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C30622BBB94B0005A5A5B /* BaseStatSubViewController.swift */; };
+		5938DE502BBBD19600385211 /* CatchedPokemonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938DE4F2BBBD19600385211 /* CatchedPokemonViewController.swift */; };
+		5938DE542BBBD1BD00385211 /* CatchedPokemonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938DE532BBBD1BD00385211 /* CatchedPokemonPresenter.swift */; };
+		5938DE562BBBD1C600385211 /* CatchedPokemonRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938DE552BBBD1C600385211 /* CatchedPokemonRouter.swift */; };
 		5968656E2BBA893000E8A6B6 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5968656D2BBA893000E8A6B6 /* Base */; };
 		598A406F2BBB9652000EA14F /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 598A406E2BBB9652000EA14F /* DGCharts */; };
 		598A40712BBB9652000EA14F /* DGChartsDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 598A40702BBB9652000EA14F /* DGChartsDynamic */; };
@@ -42,6 +45,7 @@
 		59A196352BBB21F8004F5DAC /* PokemonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A196342BBB21F8004F5DAC /* PokemonCollectionViewCell.swift */; };
 		59A196382BBB2230004F5DAC /* GeneralPokemon in Frameworks */ = {isa = PBXBuildFile; productRef = 59A196372BBB2230004F5DAC /* GeneralPokemon */; };
 		59A1963B2BBB22BE004F5DAC /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 59A1963A2BBB22BE004F5DAC /* Lottie */; };
+		59E92D272BBC09FF002A4DC5 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E92D262BBC09FF002A4DC5 /* MainTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +60,9 @@
 		591C305D2BBB924A005A5A5B /* AboutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AboutTableViewCell.swift; path = Pokedex/Screen/Detail/View/Subview/Subcell/AboutTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		591C305F2BBB9464005A5A5B /* BaseStatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseStatTableViewCell.swift; path = Pokedex/Screen/Detail/View/Subview/Subcell/BaseStatTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		591C30622BBB94B0005A5A5B /* BaseStatSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseStatSubViewController.swift; path = Pokedex/Screen/Detail/View/Subview/BaseStatSubViewController.swift; sourceTree = SOURCE_ROOT; };
+		5938DE4F2BBBD19600385211 /* CatchedPokemonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CatchedPokemonViewController.swift; path = Pokedex/Screen/Catched/View/CatchedPokemonViewController.swift; sourceTree = SOURCE_ROOT; };
+		5938DE532BBBD1BD00385211 /* CatchedPokemonPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CatchedPokemonPresenter.swift; path = Pokedex/Screen/Catched/Presenter/CatchedPokemonPresenter.swift; sourceTree = SOURCE_ROOT; };
+		5938DE552BBBD1C600385211 /* CatchedPokemonRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CatchedPokemonRouter.swift; path = Pokedex/Screen/Catched/Router/CatchedPokemonRouter.swift; sourceTree = SOURCE_ROOT; };
 		5968655E2BBA892D00E8A6B6 /* pokedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pokedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5968656D2BBA893000E8A6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5968656F2BBA893000E8A6B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -73,6 +80,7 @@
 		59A1962F2BBB2153004F5DAC /* ApiCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApiCall.swift; path = Pokedex/Util/Endpoint/ApiCall.swift; sourceTree = SOURCE_ROOT; };
 		59A196312BBB21DD004F5DAC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = Pokedex/Screen/Home/View/HomeViewController.swift; sourceTree = SOURCE_ROOT; };
 		59A196342BBB21F8004F5DAC /* PokemonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PokemonCollectionViewCell.swift; path = Pokedex/Screen/Home/View/Cell/PokemonCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		59E92D262BBC09FF002A4DC5 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainTabBarController.swift; path = Pokedex/Screen/TabBar/MainTabBarController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +106,8 @@
 		590E66962BBBCF24008552F8 /* Catched */ = {
 			isa = PBXGroup;
 			children = (
+				5938DE522BBBD1A100385211 /* Router */,
+				5938DE512BBBD19D00385211 /* Presenter */,
 				590E66972BBBCF2E008552F8 /* View */,
 			);
 			path = Catched;
@@ -107,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				590E66982BBBCF35008552F8 /* Cell */,
+				5938DE4F2BBBD19600385211 /* CatchedPokemonViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -208,6 +219,22 @@
 			path = Subcell;
 			sourceTree = "<group>";
 		};
+		5938DE512BBBD19D00385211 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				5938DE532BBBD1BD00385211 /* CatchedPokemonPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		5938DE522BBBD1A100385211 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				5938DE552BBBD1C600385211 /* CatchedPokemonRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		596865552BBA892D00E8A6B6 = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +314,7 @@
 		59A196222BBB2075004F5DAC /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				59E92D252BBC09EA002A4DC5 /* TabBar */,
 				590E66962BBBCF24008552F8 /* Catched */,
 				591C30572BBB91CA005A5A5B /* Detail */,
 				59A196292BBB211B004F5DAC /* Home */,
@@ -353,6 +381,14 @@
 				59A196342BBB21F8004F5DAC /* PokemonCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		59E92D252BBC09EA002A4DC5 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				59E92D262BBC09FF002A4DC5 /* MainTabBarController.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -451,7 +487,9 @@
 			files = (
 				598A40732BBB97A3000EA14F /* MovesTableViewCell.swift in Sources */,
 				59A196102BBB1FB3004F5DAC /* AppDelegate.swift in Sources */,
+				59E92D272BBC09FF002A4DC5 /* MainTabBarController.swift in Sources */,
 				591C30632BBB94B0005A5A5B /* BaseStatSubViewController.swift in Sources */,
+				5938DE562BBBD1C600385211 /* CatchedPokemonRouter.swift in Sources */,
 				591C30392BBB24EB005A5A5B /* AboutCellModel.swift in Sources */,
 				59A196302BBB2153004F5DAC /* ApiCall.swift in Sources */,
 				59A196112BBB1FB3004F5DAC /* SceneDelegate.swift in Sources */,
@@ -466,7 +504,9 @@
 				591C305E2BBB924A005A5A5B /* AboutTableViewCell.swift in Sources */,
 				598A40772BBB985D000EA14F /* DetailPokemonViewController.swift in Sources */,
 				591C30432BBB26FA005A5A5B /* String+Ext.swift in Sources */,
+				5938DE502BBBD19600385211 /* CatchedPokemonViewController.swift in Sources */,
 				598A40752BBB97F6000EA14F /* MovesSubViewController.swift in Sources */,
+				5938DE542BBBD1BD00385211 /* CatchedPokemonPresenter.swift in Sources */,
 				598A407D2BBB98EE000EA14F /* DetailPokemonRouter.swift in Sources */,
 				591C30312BBB2455005A5A5B /* ViewDataConverter.swift in Sources */,
 				591C305B2BBB9213005A5A5B /* AboutSubViewController.swift in Sources */,
