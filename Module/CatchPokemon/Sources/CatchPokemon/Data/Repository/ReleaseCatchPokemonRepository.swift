@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by rivaldo on 02/04/24.
 //
@@ -17,7 +17,7 @@ where
 CatchPokemonLocaleDataSource.Response == Transformer.Entity,
 Transformer.Entity == CatchPokemonEntity,
 Transformer.Domain == CatchPokemonDomainModel {
-    public typealias Request = Transformer.Domain
+    public typealias Request = Transformer.Domain?
     
     public typealias Response = Bool
     
@@ -32,12 +32,11 @@ Transformer.Domain == CatchPokemonDomainModel {
         _mapper = mapper
     }
     
-    public func execute(request: Transformer.Domain?) -> Observable<Bool> {
+    public func execute(request: Transformer.Domain??) -> Observable<Bool> {
         if let request = request {
-            return _localeDataSource.delete(entity: _mapper.transformDomainToEntity(domain: request))
+            return _localeDataSource.delete(entity: _mapper.transformDomainToEntity(domain: request!))
         } else {
             return .just(false)
         }
-
     }
 }
