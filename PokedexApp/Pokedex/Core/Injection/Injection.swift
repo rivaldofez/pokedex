@@ -37,4 +37,19 @@ final class Injection: NSObject {
         
         return Interactor(repository: repository) as! U
     }
+    
+    func providePokemonSpecies<U: UseCase>() -> U where U.Request == Int, U.Response == PokemonSpeciesDomainModel? {
+        
+        let locale = PokemonSpeciesLocaleDataSource(realm: realm!)
+        let remote = PokemonSpeciesRemoteDataSource(endpoint: { Endpoints.Gets.pokemonSpecies($0).url })
+        
+        let mapper = PokemonSpeciesTransformer()
+         
+        let repository = GetPokemonSpeciesRepository(
+          localeDataSource: locale,
+          remoteDataSource: remote,
+          mapper: mapper)
+        
+        return Interactor(repository: repository) as! U
+    }
 }
