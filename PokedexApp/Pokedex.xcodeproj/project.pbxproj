@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		590E669A2BBBCF47008552F8 /* CatchedPokemonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590E66992BBBCF47008552F8 /* CatchedPokemonTableViewCell.swift */; };
+		590E669D2BBBCFCA008552F8 /* CatchPokemon in Frameworks */ = {isa = PBXBuildFile; productRef = 590E669C2BBBCFCA008552F8 /* CatchPokemon */; };
 		591C302C2BBB2417005A5A5B /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 591C302B2BBB2417005A5A5B /* SDWebImage */; };
 		591C302E2BBB2417005A5A5B /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 591C302D2BBB2417005A5A5B /* SDWebImageMapKit */; };
 		591C30312BBB2455005A5A5B /* ViewDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C30302BBB2455005A5A5B /* ViewDataConverter.swift */; };
@@ -43,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		590E66992BBBCF47008552F8 /* CatchedPokemonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CatchedPokemonTableViewCell.swift; path = Pokedex/Screen/Catched/View/Cell/CatchedPokemonTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		591C30302BBB2455005A5A5B /* ViewDataConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewDataConverter.swift; path = Pokedex/Util/Mapper/ViewDataConverter.swift; sourceTree = SOURCE_ROOT; };
 		591C30382BBB24EB005A5A5B /* AboutCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AboutCellModel.swift; path = Pokedex/Core/Domain/Model/AboutCellModel.swift; sourceTree = SOURCE_ROOT; };
 		591C303A2BBB25B2005A5A5B /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeRouter.swift; path = Pokedex/Screen/Home/Router/HomeRouter.swift; sourceTree = SOURCE_ROOT; };
@@ -80,6 +83,7 @@
 				59A196282BBB20EE004F5DAC /* Common in Frameworks */,
 				591C302E2BBB2417005A5A5B /* SDWebImageMapKit in Frameworks */,
 				59A196382BBB2230004F5DAC /* GeneralPokemon in Frameworks */,
+				590E669D2BBBCFCA008552F8 /* CatchPokemon in Frameworks */,
 				591C302C2BBB2417005A5A5B /* SDWebImage in Frameworks */,
 				598A40712BBB9652000EA14F /* DGChartsDynamic in Frameworks */,
 				59A1963B2BBB22BE004F5DAC /* Lottie in Frameworks */,
@@ -91,6 +95,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		590E66962BBBCF24008552F8 /* Catched */ = {
+			isa = PBXGroup;
+			children = (
+				590E66972BBBCF2E008552F8 /* View */,
+			);
+			path = Catched;
+			sourceTree = "<group>";
+		};
+		590E66972BBBCF2E008552F8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				590E66982BBBCF35008552F8 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		590E66982BBBCF35008552F8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				590E66992BBBCF47008552F8 /* CatchedPokemonTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		591C302F2BBB2446005A5A5B /* Mapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +287,7 @@
 		59A196222BBB2075004F5DAC /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				590E66962BBBCF24008552F8 /* Catched */,
 				591C30572BBB91CA005A5A5B /* Detail */,
 				59A196292BBB211B004F5DAC /* Home */,
 			);
@@ -351,6 +380,7 @@
 				591C30332BBB248D005A5A5B /* SpeciesPokemon */,
 				598A406E2BBB9652000EA14F /* DGCharts */,
 				598A40702BBB9652000EA14F /* DGChartsDynamic */,
+				590E669C2BBBCFCA008552F8 /* CatchPokemon */,
 			);
 			productName = pokedex;
 			productReference = 5968655E2BBA892D00E8A6B6 /* pokedex.app */;
@@ -388,6 +418,7 @@
 				591C302A2BBB2417005A5A5B /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				591C30322BBB248D005A5A5B /* XCLocalSwiftPackageReference "../Module/SpeciesPokemon" */,
 				598A406D2BBB9652000EA14F /* XCRemoteSwiftPackageReference "Charts" */,
+				590E669B2BBBCFCA008552F8 /* XCLocalSwiftPackageReference "../Module/CatchPokemon" */,
 			);
 			productRefGroup = 5968655F2BBA892D00E8A6B6 /* Products */;
 			projectDirPath = "";
@@ -428,6 +459,7 @@
 				591C30402BBB263D005A5A5B /* Injection.swift in Sources */,
 				591C30602BBB9464005A5A5B /* BaseStatTableViewCell.swift in Sources */,
 				591C303B2BBB25B2005A5A5B /* HomeRouter.swift in Sources */,
+				590E669A2BBBCF47008552F8 /* CatchedPokemonTableViewCell.swift in Sources */,
 				598A407B2BBB98CB000EA14F /* DetailPokemonPresenter.swift in Sources */,
 				591C303D2BBB25CD005A5A5B /* HomePresenterProtocol.swift in Sources */,
 				59A196322BBB21DD004F5DAC /* HomeViewController.swift in Sources */,
@@ -652,6 +684,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		590E669B2BBBCFCA008552F8 /* XCLocalSwiftPackageReference "../Module/CatchPokemon" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Module/CatchPokemon;
+		};
 		5910D8482BBAE6A100DEA3D5 /* XCLocalSwiftPackageReference "../Module/Core" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Module/Core;
@@ -698,6 +734,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		590E669C2BBBCFCA008552F8 /* CatchPokemon */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CatchPokemon;
+		};
 		591C302B2BBB2417005A5A5B /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 591C302A2BBB2417005A5A5B /* XCRemoteSwiftPackageReference "SDWebImage" */;
