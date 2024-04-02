@@ -1,0 +1,50 @@
+//
+//  File.swift
+//  
+//
+//  Created by rivaldo on 02/04/24.
+//
+
+import Core
+import Foundation
+
+public struct CatchPokemonTransformer: Mapper {
+    public typealias Response = Any?
+    
+    public typealias Entity = CatchPokemonEntity?
+    
+    public typealias Domain = CatchPokemonDomainModel?
+    
+    public func transformResponseToEntity(response: Any?) -> CatchPokemonEntity? {
+        return nil
+    }
+    
+    public func transformEntityToDomain(entity: CatchPokemonEntity?) -> CatchPokemonDomainModel? {
+        return CatchPokemonDomainModel(
+            catchId: entity?.catchId ?? "",
+            id: entity?.id ?? 0,
+            name: entity?.name ?? "",
+            nickname: entity?.nickname ?? "",
+            image: entity?.image ?? "",
+            type: entity?.type ?? "",
+            catchDate: entity?.catchDate ?? Date()
+        )
+    }
+    
+    public func transformResponseToDomain(response: Any?) -> CatchPokemonDomainModel? {
+        return nil
+    }
+    
+    public func transformDomainToEntity(domain: CatchPokemonDomainModel?) -> CatchPokemonEntity? {
+        let cpEntity = CatchPokemonEntity()
+        cpEntity.catchId = domain?.catchId ?? ""
+        cpEntity.id = domain?.id ?? 0
+        cpEntity.name = domain?.name ?? ""
+        cpEntity.nickname = domain?.nickname ?? ""
+        cpEntity.image = domain?.image ?? ""
+        cpEntity.type = domain?.type ?? ""
+        cpEntity.catchDate = domain?.catchDate ?? Date()
+        
+        return cpEntity
+    }
+}
