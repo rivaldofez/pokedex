@@ -91,4 +91,14 @@ final class Injection: NSObject {
         return Interactor(repository: repository) as! U
         
     }
+    
+    func provideReleaseCatchPokemon<U: UseCase>() -> U where U.Request == CatchPokemonDomainModel?, U.Response == Bool {
+        
+        let locale = CatchPokemonLocaleDataSource(realm: realm!)
+        let mapper = CatchPokemonTransformer()
+        
+        let repository = ReleaseCatchPokemonRepository(localeDataSource: locale, mapper: mapper)
+        return Interactor(repository: repository) as! U
+        
+    }
 }
