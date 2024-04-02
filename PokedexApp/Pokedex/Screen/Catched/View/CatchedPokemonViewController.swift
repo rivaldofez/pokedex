@@ -59,7 +59,7 @@ class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol
     // Error View
     private lazy var errorLabel: UILabel = {
         let label = UILabel()
-        label.text = "msg.error.load.pokemon".localized(bundle: commonBundle)
+        label.text = "msg.error.load.pokemon".localized()
         label.textColor = .label
         label.font = .poppinsBold(size: 16)
         label.textAlignment = .center
@@ -86,7 +86,7 @@ class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol
         return stackview
     }()
     
-    let favoriteSearchController: UISearchController = {
+    let catchedSearchController: UISearchController = {
         let searchController = UISearchController()
         searchController.hidesNavigationBarDuringPresentation = true
         searchController.searchBar.showsScopeBar = true
@@ -99,11 +99,11 @@ class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "title.favorite".localized(bundle: commonBundle)
+        title = "title.my.pokemon".localized()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .label
         
-        navigationItem.searchController = favoriteSearchController
+        navigationItem.searchController = catchedSearchController
         
         view.backgroundColor = .systemBackground
         
@@ -116,7 +116,7 @@ class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol
         pokemonTableView.dataSource = self
         configureConstraints()
         
-        favoriteSearchController.searchBar.delegate = self
+        catchedSearchController.searchBar.delegate = self
         
     }
     
@@ -155,24 +155,20 @@ class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol
     // MARK: Presenter Action
     
     func updateReleasePokemon(with error: String) {
-        showToggleFavoriteAlert(title: "title.error.occured".localized(bundle: commonBundle), message: "msg.error.process.request".localized(bundle: commonBundle))
+        showCommonAlert(title: "title.error.occured".localized(), message: "msg.error.process.request".localized())
         presenter?.getSearchPokemon(query: nil)
     }
     
     func updateReleasePokemon(with state: Bool) {
-        if state {
-            showToggleFavoriteAlert(title: "title.add.favorite".localized(bundle: commonBundle), message: "msg.success.added.favorite".localized(bundle: commonBundle))
-        } else {
-            showToggleFavoriteAlert(title: "title.remove.favorite".localized(bundle: commonBundle), message: "msg.success.removed.favorite".localized(bundle: commonBundle))
-        }
+        showCommonAlert(title: state ? "title.release.pokemon.success".localized() : "title.release.pokemon.failed".localized(), message: state ? "msg.success.released.pokemon".localized() : "msg.failed.released.pokemon".localized() )
     }
     
     func updateEditPokemon(with state: Bool) {
-        showToggleFavoriteAlert(title: "title.add.favorite".localized(bundle: commonBundle), message: "msg.success.added.favorite".localized(bundle: commonBundle))
+        showCommonAlert(title: state ? "title.edit.nickname.pokemon.success".localized() : "title.edit.nickname.pokemon.failed".localized(), message: state ? "msg.success.edit.nickname.pokemon".localized() : "msg.failed.edit.nickname.pokemon".localized())
     }
     
     func updateEditPokemon(with error: String) {
-        
+        showCommonAlert(title: "title.error.occured".localized(), message: "msg.error.process.request".localized())
     }
     
     func updateMyPokemon(with pokemons: [CatchPokemonDomainModel]) {
@@ -180,7 +176,7 @@ class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol
             DispatchQueue.main.async {
                 self.pokemonData.removeAll()
                 self.pokemonTableView.reloadData()
-                self.showError(isError: true, message: "msg.empty.pokemon.favorite".localized(bundle: commonBundle), animation: "empty")
+                self.showError(isError: true, message: "msg.empty.my.pokemon.list".localized(), animation: "empty")
             }
         } else {
             DispatchQueue.main.async {
@@ -193,20 +189,18 @@ class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol
     }
     
     func updateMyPokemon(with error: String) {
-        showError(isError: true, message: "msg.error.load.pokemon".localized(bundle: commonBundle), animation: "error")
+        showError(isError: true, message: "msg.error.load.pokemon".localized(), animation: "error")
     }
     
     func isLoadingData(with state: Bool) {
         showLoading(isLoading: state)
     }
     
-    private func showToggleFavoriteAlert(title: String, message: String) {
+    private func showCommonAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        let okButton = UIAlertAction(title: "title.ok".localized(bundle: commonBundle), style: .default)
-        
+        let okButton = UIAlertAction(title: "title.ok".localized(), style: .default)
         alert.addAction(okButton)
-        
         self.present(alert, animated: true)
     }
     
@@ -240,7 +234,7 @@ class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol
 extension CatchedPokemonViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if pokemonData.count == 0 {
-            self.showError(isError: true, message: "msg.empty.pokemon.favorite".localized(bundle: commonBundle), animation: "empty")
+            self.showError(isError: true, message: "msg.empty.my.pokemon.list".localized(), animation: "empty")
         }
         
         return pokemonData.count
@@ -264,10 +258,6 @@ extension CatchedPokemonViewController: UITableViewDelegate, UITableViewDataSour
         presenter?.didSelectPokemonItem(with: pokemonData[indexPath.row])
     }
     
-    //    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-    //        return .delete
-    //    }
-    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -276,18 +266,15 @@ extension CatchedPokemonViewController: UITableViewDelegate, UITableViewDataSour
         
         let currentPokemon = self.pokemonData[indexPath.row]
         
-        let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: { (action, indexPath) in
+        let editAction = UITableViewRowAction(style: .normal, title: "title.edit".localized(), handler: { (action, indexPath) in
             
-            let alert = UIAlertController(title: "Nickname", message: "Choose new nickname", preferredStyle: .alert)
-            //                alert.addTextField(configurationHandler: { (textField) in
-            //                    textField.text = self.list[indexPath.row]
-            //                })
+            let alert = UIAlertController(title: "title.nickname".localized(), message: "msg.choose.new.nickname".localized(), preferredStyle: .alert)
             
             alert.addTextField { (textField) in
                 textField.placeholder = currentPokemon.nickname
             }
             
-            alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { [weak alert] (_) in
+            alert.addAction(UIAlertAction(title: "title.change".localized(), style: .default, handler: { [weak alert] (_) in
                 let nickname = alert?.textFields![0].text ?? ""
                 if nickname != currentPokemon.nickname {
                     // update nickname
@@ -297,23 +284,21 @@ extension CatchedPokemonViewController: UITableViewDelegate, UITableViewDataSour
                 }
             }))
             
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "title.cancel".localized(), style: .cancel, handler: nil))
             self.present(alert, animated: false)
         })
         
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete", handler: { (action, indexPath) in
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "title.release".localized(), handler: { (action, indexPath) in
             
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .fade)
             self.presenter?.releaseCatchPokemon(with: currentPokemon)
             self.pokemonData.remove(at: indexPath.row)
-            print("LOGDEBUG: release view called")
             tableView.endUpdates()
             
         })
         
         return [deleteAction, editAction]
-        
     }
 }
 

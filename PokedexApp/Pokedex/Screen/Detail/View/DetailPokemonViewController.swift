@@ -26,15 +26,11 @@ class DetailPokemonViewController:
     UIViewController, DetailPokemonViewProtocol {
     
     func updatePutCatchPokemonResult(with error: String) {
-        showCommonAlert(title: "title.error.occured".localized(bundle: commonBundle), message: "msg.error.process.request".localized(bundle: commonBundle))
+        showCommonAlert(title: "title.error.occured".localized(), message: "msg.error.process.request".localized())
     }
     
     func updatePutCatchPokemonResult(with state: Bool) {
-        if state {
-            showCommonAlert(title: "HORAY", message: "Your catched pokemon has been delivered to your PC, you can see it in List My Pokemon")
-        } else {
-            showCommonAlert(title: "OOPS", message: "There is error when delivered your pokemon, please try again")
-        }
+        showCommonAlert(title: state ? "title.hooray".localized() : "title.ooops".localized(), message: state ? "msg.pokemon.caught.sent".localized() : "msg.pokemon.caught.not.sent".localized())
     }
     
     var presenter: DetailPokemonPresenterProtocol?
@@ -166,7 +162,6 @@ class DetailPokemonViewController:
     private let pokemonImageView: UIImageView = {
         let imageview = UIImageView()
         imageview.translatesAutoresizingMaskIntoConstraints = false
-        imageview.image = UIImage(named: "charizard")
         imageview.contentMode = .scaleAspectFit
         return imageview
     }()
@@ -190,7 +185,6 @@ class DetailPokemonViewController:
     // Error View
     private lazy var errorLabel: UILabel = {
         let label = UILabel()
-        label.text = "Error occured while load pokemon data"
         label.textColor = .label
         label.font = .poppinsBold(size: 16)
         label.textAlignment = .center
@@ -379,19 +373,16 @@ class DetailPokemonViewController:
     
     @objc private func catchAction() {
         guard let presenter = presenter else { return }
-        //Add Condition Success Rate
         if(presenter.catchProbState()) {
-            //1. Create the alert controller.
             showNicknameAlert()
-            
         } else {
-            showCommonAlert(title: "OOPS~", message: "You missed!, the pokemon run, please try again.")
+            showCommonAlert(title: "title.ooops".localized(), message: "msg.pokemon.missed.run".localized())
         }
     }
     
     private func showCommonAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "OK", style: .default)
+        let okButton = UIAlertAction(title: "title.ok".localized(), style: .default)
         
         alert.addAction(okButton)
         self.present(alert, animated: true)
@@ -399,12 +390,12 @@ class DetailPokemonViewController:
     
     
     private func showNicknameAlert() {
-        let alert = UIAlertController(title: "GOTCHA", message: "Give your pokemon nickname", preferredStyle: .alert)
+        let alert = UIAlertController(title: "title.gotcha".localized(), message: "msg.choose.new.nickname".localized(), preferredStyle: .alert)
         
         alert.addTextField { (textField) in
             textField.placeholder = self.pokemon?.name
         }
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+        alert.addAction(UIAlertAction(title: "title.ok".localized(), style: .default, handler: { [weak alert] (_) in
             let textField = alert?.textFields![0]
             self.presenter?.putCatchedPokemon(pokemon: self.pokemon!, nickname: textField?.text ?? "")
             

@@ -13,7 +13,6 @@ class MovesTableViewCell: UITableViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Razor Leaf"
         label.font = .comfortaaRegular(size: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

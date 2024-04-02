@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct API {
     static let baseURL = "https://pokeapi.co/api/v2/"
 }

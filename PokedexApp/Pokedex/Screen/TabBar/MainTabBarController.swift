@@ -9,11 +9,9 @@ import UIKit
 import Common
 
 class MainTabBarController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         setupTabs()
     }
     
@@ -21,12 +19,12 @@ class MainTabBarController: UITabBarController {
         let homeRouter = HomeRouter.start()
         guard let homeVC = homeRouter.entry else { return }
         
-        let homeNavItem = self.createNav(with: "title.pokemon".localized(bundle: commonBundle), and: UIImage(systemName: "list.bullet.below.rectangle"), vc: homeVC)
+        let homeNavItem = self.createNav(with: "title.pokemon".localized(), and: UIImage(systemName: "list.bullet.below.rectangle"), vc: homeVC)
         
         let catchRouter = CatchedPokemonRouter.createCatched()
         guard let catchVC = catchRouter.entry else { return }
         
-        let catchNavItem = self.createNav(with: "title.favorite".localized(bundle: commonBundle), and: UIImage(systemName: "heart"), vc: catchVC)
+        let catchNavItem = self.createNav(with: "title.my.pokemon".localized(), and: UIImage(systemName: "heart"), vc: catchVC)
         
         self.setViewControllers([homeNavItem, catchNavItem], animated: true)
     }
@@ -40,5 +38,5 @@ class MainTabBarController: UITabBarController {
         
         return nav
     }
-
+    
 }

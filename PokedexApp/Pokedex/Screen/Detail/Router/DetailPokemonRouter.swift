@@ -27,10 +27,10 @@ class DetailPokemonRouter: DetailPokemonRouterProtocol {
             Int,
             PokemonSpeciesDomainModel?,
             GetPokemonSpeciesRepository<
-            PokemonSpeciesLocaleDataSource,
-            PokemonSpeciesRemoteDataSource,
-            PokemonSpeciesTransformer>>? = Injection().providePokemonSpecies()
-          
+                PokemonSpeciesLocaleDataSource,
+                PokemonSpeciesRemoteDataSource,
+                PokemonSpeciesTransformer>>? = Injection().providePokemonSpecies()
+        
         var presenter: DetailPokemonPresenterProtocol = DetailPokemonPresenter()
         
         view.presenter = presenter

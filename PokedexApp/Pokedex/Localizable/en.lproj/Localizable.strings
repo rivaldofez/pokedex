@@ -5,3 +5,37 @@
   Created by rivaldo on 03/04/24.
   
 */
+
+"title.pokemon" = "Pokemon";
+"title.my.pokemon" = "My Pokemon";
+"title.error.occured" = "Error Occured";
+"title.release.pokemon.success" = "Pokemon Released";
+"title.release.pokemon.failed" = "Pokemon Not Released";
+"title.edit.nickname.pokemon.success" = "Nickname Changed";
+"title.edit.nickname.pokemon.failed" = "Nickname not Changed";
+"title.ok" = "OK";
+"title.edit" = "Edit";
+"title.nickname" = "Nickname";
+"title.change" = "Change";
+"title.cancel" = "Cancel";
+"title.release" = "Release";
+"title.hooray" = "Hooray~";
+"title.ooops" = "Ooops!";
+"title.gotcha" = "Gotcha!";
+
+
+"msg.success.released.pokemon" = "Bye-bye buddy, sorry to let you go, see you again :)";
+"msg.failed.released.pokemon" = "Oops, your pokemon doesn't seem to go :(, it's okay, try again later";
+"msg.success.edit.nickname.pokemon" = "Wohoo, your pokemon seems very happy with the new nickname";
+"msg.failed.edit.nickname.pokemon" = "Oops, your pokemon seems unhappy with the new nickname and want to use old nickname.";
+"msg.empty.my.pokemon.list" = "Oops, you haven't caught any pokemon ye, start catching your pokemon now!";
+
+
+"msg.error.load.pokemon" = "There is error when load pokemon data, please try again";
+"msg.error.process.request" = "There is error while process your request, please try again";
+"msg.choose.new.nickname" = "Choose your pokemon new nickname";
+"msg.pokemon.caught.sent" = "Your catched pokemon has been delivered to your PC, you can see it in List My Pokemon";
+"msg.pokemon.caught.not.sent" = "There is error when delivered your pokemon, please try again";
+"msg.pokemon.missed.run" = "You missed!, the pokemon run, please try again.";
+
+

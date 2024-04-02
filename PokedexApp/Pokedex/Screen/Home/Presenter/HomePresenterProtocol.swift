@@ -70,7 +70,6 @@ class HomePresenter: HomePresenterProtocol {
     
     func didSelectPokemonItem(with pokemon: PokemonDomainModel) {
         router?.gotoDetailPokemon(with: pokemon)
-        print("LOGDEBUG: called in home presenter detail")
     }
     
 }

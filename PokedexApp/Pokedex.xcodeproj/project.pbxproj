@@ -45,6 +45,7 @@
 		59A196352BBB21F8004F5DAC /* PokemonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A196342BBB21F8004F5DAC /* PokemonCollectionViewCell.swift */; };
 		59A196382BBB2230004F5DAC /* GeneralPokemon in Frameworks */ = {isa = PBXBuildFile; productRef = 59A196372BBB2230004F5DAC /* GeneralPokemon */; };
 		59A1963B2BBB22BE004F5DAC /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 59A1963A2BBB22BE004F5DAC /* Lottie */; };
+		59CE72DD2BBC7B1300531CB0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 59CE72DB2BBC7B1300531CB0 /* Localizable.strings */; };
 		59E92D272BBC09FF002A4DC5 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E92D262BBC09FF002A4DC5 /* MainTabBarController.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,8 @@
 		59A1962F2BBB2153004F5DAC /* ApiCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApiCall.swift; path = Pokedex/Util/Endpoint/ApiCall.swift; sourceTree = SOURCE_ROOT; };
 		59A196312BBB21DD004F5DAC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = Pokedex/Screen/Home/View/HomeViewController.swift; sourceTree = SOURCE_ROOT; };
 		59A196342BBB21F8004F5DAC /* PokemonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PokemonCollectionViewCell.swift; path = Pokedex/Screen/Home/View/Cell/PokemonCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		59CE72DC2BBC7B1300531CB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Pokedex/Localizable/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		59CE72DE2BBC7B5100531CB0 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = ../../Pokedex/Localizable/id.lproj/Localizable.strings; sourceTree = "<group>"; };
 		59E92D262BBC09FF002A4DC5 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainTabBarController.swift; path = Pokedex/Screen/TabBar/MainTabBarController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -254,6 +257,7 @@
 		596865602BBA892D00E8A6B6 /* pokedex */ = {
 			isa = PBXGroup;
 			children = (
+				59CE72DA2BBC7AE900531CB0 /* Localizable */,
 				591C30352BBB24CD005A5A5B /* Core */,
 				59A1962D2BBB213F004F5DAC /* Util */,
 				59A196222BBB2075004F5DAC /* Screen */,
@@ -383,6 +387,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		59CE72DA2BBC7AE900531CB0 /* Localizable */ = {
+			isa = PBXGroup;
+			children = (
+				59CE72DB2BBC7B1300531CB0 /* Localizable.strings */,
+			);
+			path = Localizable;
+			sourceTree = "<group>";
+		};
 		59E92D252BBC09EA002A4DC5 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -444,6 +456,7 @@
 			knownRegions = (
 				en,
 				Base,
+				id,
 			);
 			mainGroup = 596865552BBA892D00E8A6B6;
 			packageReferences = (
@@ -471,6 +484,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59A1961F2BBB2038004F5DAC /* error.json in Resources */,
+				59CE72DD2BBC7B1300531CB0 /* Localizable.strings in Resources */,
 				59A196202BBB2038004F5DAC /* empty.json in Resources */,
 				59A196142BBB1FBD004F5DAC /* Assets.xcassets in Resources */,
 				5968656E2BBA893000E8A6B6 /* Base in Resources */,
@@ -524,6 +538,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		59CE72DB2BBC7B1300531CB0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				59CE72DC2BBC7B1300531CB0 /* en */,
+				59CE72DE2BBC7B5100531CB0 /* id */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -532,6 +555,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -595,6 +619,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

@@ -76,7 +76,7 @@ class DetailPokemonPresenter: DetailPokemonPresenterProtocol {
                 if let pokemonSpecies = pokemonSpeciesResult {
                     self?.view?.updatePokemonSpecies(with: pokemonSpecies)
                 } else {
-                    self?.view?.updatePokemonSpecies(with: "msg.error.retrieve.detail.pokemon".localized(bundle: commonBundle))
+                    self?.view?.updatePokemonSpecies(with: "msg.error.retrieve.detail.pokemon".localized())
                 }
             } onError: { error in
                 self.view?.updatePokemonSpecies(with: error.localizedDescription)
@@ -103,7 +103,7 @@ class DetailPokemonPresenter: DetailPokemonPresenterProtocol {
     
     func putCatchedPokemon(pokemon: PokemonDomainModel, nickname: String) {
         self.isLoadingData = true
-
+        
         let catchModel = CatchPokemonDomainModel(catchId: UUID().uuidString, id: pokemon.id, name: pokemon.name, nickname: nickname.isEmpty ? pokemon.name.capitalized : nickname, image: pokemon.image, type: pokemon.type, catchDate: Date())
         
         putCatchPokemonInteractor?.execute(request: catchModel)

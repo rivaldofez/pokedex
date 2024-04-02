@@ -16,7 +16,6 @@ class CatchedPokemonTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "charizard")
         imageView.alpha = 1
         imageView.clipsToBounds = true
         return imageView
@@ -26,7 +25,6 @@ class CatchedPokemonTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "normal")
         imageView.alpha = 1
         imageView.clipsToBounds = true
         return imageView
@@ -44,7 +42,6 @@ class CatchedPokemonTableViewCell: UITableViewCell {
     private let pokemonNicknameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Mighty Bulbasaur"
         label.font = .poppinsRegular(size: 16)
         label.textAlignment = .center
         label.textColor = .label
@@ -55,7 +52,6 @@ class CatchedPokemonTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.text = "Charizard"
         label.font = .poppinsMedium(size: 14)
         label.textColor = .secondaryLabel
         return label
@@ -63,9 +59,7 @@ class CatchedPokemonTableViewCell: UITableViewCell {
     
     private lazy var pokemonTypeStackView: UIStackView = {
         let stackView = UIStackView()
-
         stackView.axis = .horizontal
-
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .center

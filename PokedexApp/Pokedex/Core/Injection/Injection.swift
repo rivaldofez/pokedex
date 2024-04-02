@@ -54,24 +54,6 @@ final class Injection: NSObject {
         return Interactor(repository: repository) as! U
     }
     
-//    func provideToggleFavorite<U: UseCase>() -> U where U.Request == PokemonDomainModel, U.Response == Bool {
-//        let locale = PokemonLocaleDataSource(realm: realm!)
-//        let mapper = PokemonTransformer()
-//        
-//        let repository = ToggleFavoritePokemonRepository(localeDataSource: locale, mapper: mapper)
-//        return Interactor(repository: repository) as! U
-//    }
-//    
-//    func provideFavorite<U: UseCase>() -> U where U.Request == String, U.Response == [PokemonDomainModel] {
-//        
-//        let locale = FavoritePokemonLocaleDataSource(realm: realm!)
-//        let mapper = PokemonsTransformer()
-//        
-//        let repository = GetFavoritePokemonsRepository(localeDataSource: locale, mapper: mapper)
-//        
-//        return Interactor(repository: repository) as! U
-//    }
-    
     func providePutCatchPokemon<U: UseCase>() -> U where U.Request == CatchPokemonDomainModel?, U.Response == Bool {
         
         let locale = CatchPokemonLocaleDataSource(realm: realm!)
@@ -99,6 +81,5 @@ final class Injection: NSObject {
         
         let repository = ReleaseCatchPokemonRepository(localeDataSource: locale, mapper: mapper)
         return Interactor(repository: repository) as! U
-        
     }
 }
