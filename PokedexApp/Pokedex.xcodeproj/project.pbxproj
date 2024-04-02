@@ -16,7 +16,13 @@
 		591C303D2BBB25CD005A5A5B /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C303C2BBB25CD005A5A5B /* HomePresenter.swift */; };
 		591C30402BBB263D005A5A5B /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C303F2BBB263D005A5A5B /* Injection.swift */; };
 		591C30432BBB26FA005A5A5B /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C30422BBB26FA005A5A5B /* String+Ext.swift */; };
+		591C305B2BBB9213005A5A5B /* AboutSubviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C305A2BBB9213005A5A5B /* AboutSubviewController.swift */; };
+		591C305E2BBB924A005A5A5B /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C305D2BBB924A005A5A5B /* AboutTableViewCell.swift */; };
+		591C30602BBB9464005A5A5B /* BaseStatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C305F2BBB9464005A5A5B /* BaseStatTableViewCell.swift */; };
+		591C30632BBB94B0005A5A5B /* BaseStatSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C30622BBB94B0005A5A5B /* BaseStatSubViewController.swift */; };
 		5968656E2BBA893000E8A6B6 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5968656D2BBA893000E8A6B6 /* Base */; };
+		598A406F2BBB9652000EA14F /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 598A406E2BBB9652000EA14F /* DGCharts */; };
+		598A40712BBB9652000EA14F /* DGChartsDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 598A40702BBB9652000EA14F /* DGChartsDynamic */; };
 		59A196102BBB1FB3004F5DAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A1960D2BBB1FB3004F5DAC /* AppDelegate.swift */; };
 		59A196112BBB1FB3004F5DAC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A1960E2BBB1FB3004F5DAC /* SceneDelegate.swift */; };
 		59A196142BBB1FBD004F5DAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59A196122BBB1FBD004F5DAC /* Assets.xcassets */; };
@@ -38,6 +44,10 @@
 		591C303C2BBB25CD005A5A5B /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomePresenter.swift; path = Pokedex/Screen/Home/Presenter/HomePresenter.swift; sourceTree = SOURCE_ROOT; };
 		591C303F2BBB263D005A5A5B /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Injection.swift; path = Pokedex/Core/Injection/Injection.swift; sourceTree = SOURCE_ROOT; };
 		591C30422BBB26FA005A5A5B /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Ext.swift"; path = "Pokedex/Util/Extension/String+Ext.swift"; sourceTree = SOURCE_ROOT; };
+		591C305A2BBB9213005A5A5B /* AboutSubviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AboutSubviewController.swift; path = Pokedex/Screen/Detail/View/Subview/AboutSubviewController.swift; sourceTree = SOURCE_ROOT; };
+		591C305D2BBB924A005A5A5B /* AboutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AboutTableViewCell.swift; path = Pokedex/Screen/Detail/View/Subview/Subcell/AboutTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		591C305F2BBB9464005A5A5B /* BaseStatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseStatTableViewCell.swift; path = Pokedex/Screen/Detail/View/Subview/Subcell/BaseStatTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		591C30622BBB94B0005A5A5B /* BaseStatSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseStatSubViewController.swift; path = Pokedex/Screen/Detail/View/Subview/BaseStatSubViewController.swift; sourceTree = SOURCE_ROOT; };
 		5968655E2BBA892D00E8A6B6 /* pokedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pokedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5968656D2BBA893000E8A6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5968656F2BBA893000E8A6B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -61,7 +71,9 @@
 				591C302E2BBB2417005A5A5B /* SDWebImageMapKit in Frameworks */,
 				59A196382BBB2230004F5DAC /* GeneralPokemon in Frameworks */,
 				591C302C2BBB2417005A5A5B /* SDWebImage in Frameworks */,
+				598A40712BBB9652000EA14F /* DGChartsDynamic in Frameworks */,
 				59A1963B2BBB22BE004F5DAC /* Lottie in Frameworks */,
+				598A406F2BBB9652000EA14F /* DGCharts in Frameworks */,
 				591C30342BBB248D005A5A5B /* SpeciesPokemon in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,6 +128,41 @@
 				591C30422BBB26FA005A5A5B /* String+Ext.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		591C30572BBB91CA005A5A5B /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				591C30582BBB91CF005A5A5B /* View */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		591C30582BBB91CF005A5A5B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				591C30592BBB9202005A5A5B /* Subview */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		591C30592BBB9202005A5A5B /* Subview */ = {
+			isa = PBXGroup;
+			children = (
+				591C305C2BBB9238005A5A5B /* Subcell */,
+				591C305A2BBB9213005A5A5B /* AboutSubviewController.swift */,
+				591C30622BBB94B0005A5A5B /* BaseStatSubViewController.swift */,
+			);
+			path = Subview;
+			sourceTree = "<group>";
+		};
+		591C305C2BBB9238005A5A5B /* Subcell */ = {
+			isa = PBXGroup;
+			children = (
+				591C305D2BBB924A005A5A5B /* AboutTableViewCell.swift */,
+				591C305F2BBB9464005A5A5B /* BaseStatTableViewCell.swift */,
+			);
+			path = Subcell;
 			sourceTree = "<group>";
 		};
 		596865552BBA892D00E8A6B6 = {
@@ -181,6 +228,7 @@
 		59A196222BBB2075004F5DAC /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				591C30572BBB91CA005A5A5B /* Detail */,
 				59A196292BBB211B004F5DAC /* Home */,
 			);
 			path = Screen;
@@ -270,6 +318,8 @@
 				591C302B2BBB2417005A5A5B /* SDWebImage */,
 				591C302D2BBB2417005A5A5B /* SDWebImageMapKit */,
 				591C30332BBB248D005A5A5B /* SpeciesPokemon */,
+				598A406E2BBB9652000EA14F /* DGCharts */,
+				598A40702BBB9652000EA14F /* DGChartsDynamic */,
 			);
 			productName = pokedex;
 			productReference = 5968655E2BBA892D00E8A6B6 /* pokedex.app */;
@@ -306,6 +356,7 @@
 				59A196392BBB22BE004F5DAC /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				591C302A2BBB2417005A5A5B /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				591C30322BBB248D005A5A5B /* XCLocalSwiftPackageReference "../Module/SpeciesPokemon" */,
+				598A406D2BBB9652000EA14F /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 5968655F2BBA892D00E8A6B6 /* Products */;
 			projectDirPath = "";
@@ -337,16 +388,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				59A196102BBB1FB3004F5DAC /* AppDelegate.swift in Sources */,
+				591C30632BBB94B0005A5A5B /* BaseStatSubViewController.swift in Sources */,
 				591C30392BBB24EB005A5A5B /* AboutCellModel.swift in Sources */,
 				59A196302BBB2153004F5DAC /* ApiCall.swift in Sources */,
 				59A196112BBB1FB3004F5DAC /* SceneDelegate.swift in Sources */,
 				59A196352BBB21F8004F5DAC /* PokemonCollectionViewCell.swift in Sources */,
 				591C30402BBB263D005A5A5B /* Injection.swift in Sources */,
+				591C30602BBB9464005A5A5B /* BaseStatTableViewCell.swift in Sources */,
 				591C303B2BBB25B2005A5A5B /* HomeRouter.swift in Sources */,
 				591C303D2BBB25CD005A5A5B /* HomePresenter.swift in Sources */,
 				59A196322BBB21DD004F5DAC /* HomeViewController.swift in Sources */,
+				591C305E2BBB924A005A5A5B /* AboutTableViewCell.swift in Sources */,
 				591C30432BBB26FA005A5A5B /* String+Ext.swift in Sources */,
 				591C30312BBB2455005A5A5B /* ViewDataConverter.swift in Sources */,
+				591C305B2BBB9213005A5A5B /* AboutSubviewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +643,14 @@
 				minimumVersion = 5.19.1;
 			};
 		};
+		598A406D2BBB9652000EA14F /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ChartsOrg/Charts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
 		59A196392BBB22BE004F5DAC /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
@@ -612,6 +675,16 @@
 		591C30332BBB248D005A5A5B /* SpeciesPokemon */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SpeciesPokemon;
+		};
+		598A406E2BBB9652000EA14F /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 598A406D2BBB9652000EA14F /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
+		};
+		598A40702BBB9652000EA14F /* DGChartsDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 598A406D2BBB9652000EA14F /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGChartsDynamic;
 		};
 		59A196272BBB20EE004F5DAC /* Common */ = {
 			isa = XCSwiftPackageProductDependency;
