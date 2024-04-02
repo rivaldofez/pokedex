@@ -26,7 +26,7 @@ public struct CatchPokemonTransformer: Mapper {
             name: entity?.name ?? "",
             nickname: entity?.nickname ?? "",
             image: entity?.image ?? "",
-            type: entity?.type ?? "",
+            type: (entity?.type ?? "").components(separatedBy: ","),
             catchDate: entity?.catchDate ?? Date()
         )
     }
@@ -42,7 +42,7 @@ public struct CatchPokemonTransformer: Mapper {
         cpEntity.name = domain?.name ?? ""
         cpEntity.nickname = domain?.nickname ?? ""
         cpEntity.image = domain?.image ?? ""
-        cpEntity.type = domain?.type ?? ""
+        cpEntity.type = (domain?.type ?? []).joined(separator: ",")
         cpEntity.catchDate = domain?.catchDate ?? Date()
         
         return cpEntity
