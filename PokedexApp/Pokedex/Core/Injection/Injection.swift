@@ -10,6 +10,7 @@ import RealmSwift
 import Core
 import SpeciesPokemon
 import GeneralPokemon
+import CatchPokemon
 
 final class Injection: NSObject {
     private let realm = try? Realm()
@@ -51,5 +52,43 @@ final class Injection: NSObject {
           mapper: mapper)
         
         return Interactor(repository: repository) as! U
+    }
+    
+//    func provideToggleFavorite<U: UseCase>() -> U where U.Request == PokemonDomainModel, U.Response == Bool {
+//        let locale = PokemonLocaleDataSource(realm: realm!)
+//        let mapper = PokemonTransformer()
+//        
+//        let repository = ToggleFavoritePokemonRepository(localeDataSource: locale, mapper: mapper)
+//        return Interactor(repository: repository) as! U
+//    }
+//    
+//    func provideFavorite<U: UseCase>() -> U where U.Request == String, U.Response == [PokemonDomainModel] {
+//        
+//        let locale = FavoritePokemonLocaleDataSource(realm: realm!)
+//        let mapper = PokemonsTransformer()
+//        
+//        let repository = GetFavoritePokemonsRepository(localeDataSource: locale, mapper: mapper)
+//        
+//        return Interactor(repository: repository) as! U
+//    }
+    
+    func providePutCatchPokemon<U: UseCase>() -> U where U.Request == CatchPokemonDomainModel?, U.Response == Bool {
+        
+        let locale = CatchPokemonLocaleDataSource(realm: realm!)
+        let mapper = CatchPokemonTransformer()
+        
+        let repository = PutCatchPokemonRepository(localeDataSource: locale, mapper: mapper)
+        return Interactor(repository: repository) as! U
+        
+    }
+    
+    func provideGetCatchPokemon<U: UseCase>() -> U where U.Request == String, U.Response == [CatchPokemonDomainModel] {
+        
+        let locale = CatchPokemonLocaleDataSource(realm: realm!)
+        let mapper = CatchPokemonsTransformer()
+        
+        let repository = GetCatchPokemonRepository(localeDataSource: locale, mapper: mapper)
+        return Interactor(repository: repository) as! U
+        
     }
 }
