@@ -31,13 +31,6 @@ protocol DetailPokemonPresenterProtocol {
             CatchPokemonLocaleDataSource,
             CatchPokemonTransformer>>? { get set }
     
-//    var toggleFavoriteInteractor: Interactor<
-//        PokemonDomainModel,
-//        Bool,
-//        ToggleFavoritePokemonRepository<
-//            PokemonLocaleDataSource,
-//            PokemonTransformer>>? { get set }
-    
     var pokemonInteractor: Interactor<
         Int,
         PokemonDomainModel,
@@ -51,7 +44,8 @@ protocol DetailPokemonPresenterProtocol {
     
     func getPokemonSpecies(id: Int)
     func getPokemon(with pokemon: PokemonDomainModel)
-    func saveToggleFavorite(pokemon: PokemonDomainModel)
+    func putCatchedPokemon(pokemon: PokemonDomainModel, nickname: String)
+    func catchProbState() -> Bool
 }
 
 class DetailPokemonPresenter: DetailPokemonPresenterProtocol {
@@ -107,19 +101,24 @@ class DetailPokemonPresenter: DetailPokemonPresenterProtocol {
             }.disposed(by: disposeBag)
     }
     
-    func saveToggleFavorite(pokemon: PokemonDomainModel) {
+    func putCatchedPokemon(pokemon: PokemonDomainModel, nickname: String) {
         self.isLoadingData = true
-        
-        let catchModel = CatchPokemonDomainModel(catchId: UUID().uuidString, id: pokemon.id, name: pokemon.name, nickname: "Nickname", image: pokemon.image, type: pokemon.type, catchDate: Date())
+
+        let catchModel = CatchPokemonDomainModel(catchId: UUID().uuidString, id: pokemon.id, name: pokemon.name, nickname: nickname.isEmpty ? pokemon.name.capitalized : nickname, image: pokemon.image, type: pokemon.type, catchDate: Date())
         
         putCatchPokemonInteractor?.execute(request: catchModel)
             .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] _ in
-                self?.view?.updateSaveToggleFavorite(with: pokemon.isFavorite)
+            .subscribe { [weak self] state in
+                self?.view?.updatePutCatchPokemonResult(with: state)
             } onError: { error in
-                self.view?.updateSaveToggleFavorite(with: error.localizedDescription)
+                self.view?.updatePutCatchPokemonResult(with: error.localizedDescription)
             } onCompleted: {
                 self.isLoadingData = false
             }.disposed(by: disposeBag)
+    }
+    
+    func catchProbState() -> Bool {
+        let rand = Double.random(in: 0..<1)
+        return rand < 0.5
     }
 }
