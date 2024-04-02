@@ -17,35 +17,23 @@ protocol DetailPokemonViewProtocol {
     func updatePokemonSpecies(with pokemonSpecies: PokemonSpeciesDomainModel)
     func updatePokemonSpecies(with error: String)
     func updatePokemon(with pokemon: PokemonDomainModel)
-    func updateSaveToggleFavorite(with error: String)
-    func updateSaveToggleFavorite(with state: Bool)
+    func updatePutCatchPokemonResult(with error: String)
+    func updatePutCatchPokemonResult(with state: Bool)
     func isLoadingData(with state: Bool)
 }
 
 class DetailPokemonViewController:
     UIViewController, DetailPokemonViewProtocol {
     
-    private func showToggleFavoriteAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "OK", style: .default)
-        
-        // For UI Testing
-        okButton.accessibilityIdentifier = "okButton"
-        alert.view.accessibilityIdentifier = "favoriteAlert"
-        
-        alert.addAction(okButton)
-        self.present(alert, animated: true)
+    func updatePutCatchPokemonResult(with error: String) {
+        showCommonAlert(title: "title.error.occured".localized(bundle: commonBundle), message: "msg.error.process.request".localized(bundle: commonBundle))
     }
     
-    func updateSaveToggleFavorite(with error: String) {
-        showToggleFavoriteAlert(title: "title.error.occured".localized(bundle: commonBundle), message: "msg.error.process.request".localized(bundle: commonBundle))
-    }
-    
-    func updateSaveToggleFavorite(with state: Bool) {
+    func updatePutCatchPokemonResult(with state: Bool) {
         if state {
-            showToggleFavoriteAlert(title: "title.add.favorite".localized(bundle: commonBundle), message: "msg.success.added.favorite".localized(bundle: commonBundle))
+            showCommonAlert(title: "HORAY", message: "Your catched pokemon has been delivered to your PC, you can see it in List My Pokemon")
         } else {
-            showToggleFavoriteAlert(title: "title.remove.favorite".localized(bundle: commonBundle), message: "msg.success.removed.favorite".localized(bundle: commonBundle))
+            showCommonAlert(title: "OOPS", message: "There is error when delivered your pokemon, please try again")
         }
     }
     
@@ -78,7 +66,6 @@ class DetailPokemonViewController:
         
         indicator.backgroundColor = UIColor(named: ViewDataConverter.typeStringToColorName(type: pokemon.type.first!))
         showError(isError: false)
-        showFavoriteButton(isFavorite: pokemon.isFavorite)
     }
     
     func isLoadingData(with state: Bool) {
@@ -237,11 +224,11 @@ class DetailPokemonViewController:
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .label
         
-//        let attrs = [
-//            NSAttributedString.Key.font: UIFont.poppinsBold(size: 34)
-//        ]
-//        
-//        navigationController?.navigationBar.largeTitleTextAttributes = attrs as [NSAttributedString.Key: Any]
+        //        let attrs = [
+        //            NSAttributedString.Key.font: UIFont.poppinsBold(size: 34)
+        //        ]
+        //
+        //        navigationController?.navigationBar.largeTitleTextAttributes = attrs as [NSAttributedString.Key: Any]
         
         view.addSubview(pokemonTypeStackView)
         view.addSubview(pokemonImageView)
@@ -255,6 +242,7 @@ class DetailPokemonViewController:
         
         configureConstraints()
         configureStackButton()
+        setCatchButton()
     }
     
     override func viewDidLayoutSubviews() {
@@ -382,38 +370,46 @@ class DetailPokemonViewController:
         return stackView
     }
     
-    private func showFavoriteButton(isFavorite: Bool) {
-        if self.navigationItem.rightBarButtonItem == nil {
-            let button = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteAction))
-            button.accessibilityIdentifier = "favoriteButton"
-            
-            if isFavorite {
-                button.image = UIImage(systemName: "heart.fill")
-                button.tintColor = UIColor.red
-            } else {
-                button.image = UIImage(systemName: "heart")
-                button.tintColor = UIColor.gray
-            }
-            
-            navigationItem.rightBarButtonItem = button
+    private func setCatchButton() {
+        let button = UIBarButtonItem(image: UIImage(named: "icon_pokeball"), style: .plain, target: self, action: #selector(catchAction))
+        
+        navigationItem.rightBarButtonItem = button
+        
+    }
+    
+    @objc private func catchAction() {
+        guard let presenter = presenter else { return }
+        //Add Condition Success Rate
+        if(presenter.catchProbState()) {
+            //1. Create the alert controller.
+            showNicknameAlert()
             
         } else {
-            if isFavorite {
-                self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart.fill")
-                self.navigationItem.rightBarButtonItem?.tintColor = UIColor.red
-            } else {
-                self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart")
-                self.navigationItem.rightBarButtonItem?.tintColor = UIColor.gray
-            }
+            showCommonAlert(title: "OOPS~", message: "You missed!, the pokemon run, please try again.")
         }
     }
     
-    @objc private func favoriteAction() {
-        pokemon?.isFavorite.toggle()
-        if let pokemon = self.pokemon {
-            showFavoriteButton(isFavorite: pokemon.isFavorite)
-            presenter?.saveToggleFavorite(pokemon: pokemon)
+    private func showCommonAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "OK", style: .default)
+        
+        alert.addAction(okButton)
+        self.present(alert, animated: true)
+    }
+    
+    
+    private func showNicknameAlert() {
+        let alert = UIAlertController(title: "GOTCHA", message: "Give your pokemon nickname", preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = self.pokemon?.name
         }
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0]
+            self.presenter?.putCatchedPokemon(pokemon: self.pokemon!, nickname: textField?.text ?? "")
+            
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @objc private func didTapTab(_ sender: UIButton) {
