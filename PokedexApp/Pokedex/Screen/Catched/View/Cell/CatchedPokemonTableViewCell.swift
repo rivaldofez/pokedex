@@ -41,13 +41,13 @@ class CatchedPokemonTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private let pokemonNumberLabel: UILabel = {
+    private let pokemonNicknameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "No.999"
-        label.font = .poppinsRegular(size: 18)
+        label.text = "Mighty Bulbasaur"
+        label.font = .poppinsRegular(size: 16)
         label.textAlignment = .center
-        label.textColor = .secondaryLabel
+        label.textColor = .label
         return label
     }()
     
@@ -56,8 +56,8 @@ class CatchedPokemonTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.text = "Charizard"
-        label.font = .poppinsMedium(size: 16)
-        label.textColor = .label
+        label.font = .poppinsMedium(size: 14)
+        label.textColor = .secondaryLabel
         return label
     }()
     
@@ -80,7 +80,7 @@ class CatchedPokemonTableViewCell: UITableViewCell {
         contentView.addSubview(pokemonImageView)
         contentView.addSubview(pokemonTypeImageView)
         contentView.addSubview(pokemonNameLabel)
-        contentView.addSubview(pokemonNumberLabel)
+        contentView.addSubview(pokemonNicknameLabel)
         
         configureConstraints()
     }
@@ -111,13 +111,13 @@ class CatchedPokemonTableViewCell: UITableViewCell {
         ]
         
         let pokemonNumberLabelConstraints = [
-            pokemonNumberLabel.leadingAnchor.constraint(equalTo: pokeballImageView.trailingAnchor, constant: 8),
-            pokemonNumberLabel.topAnchor.constraint(equalTo: pokeballImageView.topAnchor)
+            pokemonNicknameLabel.leadingAnchor.constraint(equalTo: pokeballImageView.trailingAnchor, constant: 8),
+            pokemonNicknameLabel.topAnchor.constraint(equalTo: pokeballImageView.topAnchor)
         ]
         
         let pokemonNameLabelConstraints = [
             pokemonNameLabel.leadingAnchor.constraint(equalTo: pokeballImageView.trailingAnchor, constant: 8),
-            pokemonNameLabel.topAnchor.constraint(equalTo: pokemonNumberLabel.bottomAnchor, constant: 4)
+            pokemonNameLabel.topAnchor.constraint(equalTo: pokemonNicknameLabel.bottomAnchor, constant: 4)
         ]
         
         let pokemonTypeStackViewConstraints = [
@@ -134,7 +134,7 @@ class CatchedPokemonTableViewCell: UITableViewCell {
     
     // MARK: Cell Data Bind
     func configure(with model: CatchPokemonDomainModel) {
-        pokemonNumberLabel.text = "No.\(model.id)"
+        pokemonNicknameLabel.text = model.nickname
         pokemonNameLabel.text = model.name.capitalized
         
         guard let imageUrl = URL(string: model.image) else { return }
