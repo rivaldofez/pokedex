@@ -9,10 +9,11 @@ import RealmSwift
 import Foundation
 
 public class CatchPokemonEntity: Object {
-    @Persisted(primaryKey: true) public var id: Int
+    @Persisted(primaryKey: true) public var catchId: String
+    @Persisted public var id: Int
     @Persisted public var name: String
     @Persisted public var nickname: String
     @Persisted public var image: String
     @Persisted public var type: String
-    @Persisted public var addedDate: Date
+    @Persisted public var catchDate: Date
 }
