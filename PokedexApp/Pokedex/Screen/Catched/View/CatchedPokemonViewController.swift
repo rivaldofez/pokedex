@@ -15,15 +15,16 @@ import CatchPokemon
 protocol CatchedPokemonViewProtocol {
     var presenter: CatchedPokemonPresenterProtocol? { get set }
     
-    func updatePokemonFavorite(with pokemons: [CatchPokemonDomainModel])
-    func updatePokemonFavorite(with error: String)
-    func updateSaveToggleFavorite(with error: String)
-    func updateSaveToggleFavorite(with state: Bool)
+    func updateMyPokemon(with pokemons: [CatchPokemonDomainModel])
+    func updateMyPokemon(with error: String)
+    func updateReleasePokemon(with error: String)
+    func updateReleasePokemon(with state: Bool)
+    func updateEditPokemon(with state: Bool)
+    func updateEditPokemon(with error: String)
     func isLoadingData(with state: Bool)
 }
 
 class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol {
-
     var presenter: CatchedPokemonPresenterProtocol?
     
     private var pokemonData: [CatchPokemonDomainModel] = []
@@ -32,7 +33,7 @@ class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol
     // MARK: View Components
     // Favorite Table View
     private lazy var pokemonTableView: UITableView = {
-       let tableView = UITableView()
+        let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         tableView.register(CatchedPokemonTableViewCell.self, forCellReuseIdentifier: CatchedPokemonTableViewCell.identifier)
@@ -86,7 +87,7 @@ class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol
     }()
     
     let favoriteSearchController: UISearchController = {
-       let searchController = UISearchController()
+        let searchController = UISearchController()
         searchController.hidesNavigationBarDuringPresentation = true
         searchController.searchBar.showsScopeBar = true
         searchController.automaticallyShowsCancelButton = true
@@ -94,7 +95,7 @@ class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol
         
         return searchController
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -153,14 +154,12 @@ class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol
     
     // MARK: Presenter Action
     
-    func updateSaveToggleFavorite(with error: String) {
-        func updateSaveToggleFavorite(with error: String) {
-            showToggleFavoriteAlert(title: "title.error.occured".localized(bundle: commonBundle), message: "msg.error.process.request".localized(bundle: commonBundle))
-        }
+    func updateReleasePokemon(with error: String) {
+        showToggleFavoriteAlert(title: "title.error.occured".localized(bundle: commonBundle), message: "msg.error.process.request".localized(bundle: commonBundle))
         presenter?.getSearchPokemon(query: nil)
     }
     
-    func updateSaveToggleFavorite(with state: Bool) {
+    func updateReleasePokemon(with state: Bool) {
         if state {
             showToggleFavoriteAlert(title: "title.add.favorite".localized(bundle: commonBundle), message: "msg.success.added.favorite".localized(bundle: commonBundle))
         } else {
@@ -168,7 +167,15 @@ class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol
         }
     }
     
-    func updatePokemonFavorite(with pokemons: [CatchPokemonDomainModel]) {
+    func updateEditPokemon(with state: Bool) {
+        showToggleFavoriteAlert(title: "title.add.favorite".localized(bundle: commonBundle), message: "msg.success.added.favorite".localized(bundle: commonBundle))
+    }
+    
+    func updateEditPokemon(with error: String) {
+        
+    }
+    
+    func updateMyPokemon(with pokemons: [CatchPokemonDomainModel]) {
         if pokemons.isEmpty {
             DispatchQueue.main.async {
                 self.pokemonData.removeAll()
@@ -185,7 +192,7 @@ class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol
         }
     }
     
-    func updatePokemonFavorite(with error: String) {
+    func updateMyPokemon(with error: String) {
         showError(isError: true, message: "msg.error.load.pokemon".localized(bundle: commonBundle), animation: "error")
     }
     
@@ -257,30 +264,62 @@ extension CatchedPokemonViewController: UITableViewDelegate, UITableViewDataSour
         presenter?.didSelectPokemonItem(with: pokemonData[indexPath.row])
     }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .delete
+    //    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    //        return .delete
+    //    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let currentPokemon = self.pokemonData[indexPath.row]
+        
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: { (action, indexPath) in
+            
+            let alert = UIAlertController(title: "Nickname", message: "Choose new nickname", preferredStyle: .alert)
+            //                alert.addTextField(configurationHandler: { (textField) in
+            //                    textField.text = self.list[indexPath.row]
+            //                })
+            
+            alert.addTextField { (textField) in
+                textField.placeholder = currentPokemon.nickname
+            }
+            
+            alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { [weak alert] (_) in
+                let nickname = alert?.textFields![0].text ?? ""
+                if nickname != currentPokemon.nickname {
+                    // update nickname
+                    currentPokemon.nickname = nickname
+                    self.presenter?.putUpdateCatchPokemon(with: currentPokemon)
+                    self.pokemonTableView.reloadData()
+                }
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: false)
+        })
+        
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete", handler: { (action, indexPath) in
+            
             tableView.beginUpdates()
-            
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
-            var model = pokemonData[indexPath.row]
-//            model.isFavorite = false
-            
-            presenter?.saveToggleFavorite(pokemon: model)
-            pokemonData.remove(at: indexPath.row)
-            
+            self.presenter?.releaseCatchPokemon(with: currentPokemon)
+            self.pokemonData.remove(at: indexPath.row)
+            print("LOGDEBUG: release view called")
             tableView.endUpdates()
-        }
+            
+        })
+        
+        return [deleteAction, editAction]
+        
     }
 }
 
 extension CatchedPokemonViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            presenter?.getSearchPokemon(query: searchText)
+        presenter?.getSearchPokemon(query: searchText)
     }
 }
 
