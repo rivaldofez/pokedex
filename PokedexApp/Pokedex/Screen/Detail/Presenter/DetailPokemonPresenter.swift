@@ -11,6 +11,7 @@ import GeneralPokemon
 import SpeciesPokemon
 import Common
 import RxSwift
+import CatchPokemon
 
 protocol DetailPokemonPresenterProtocol {
     var router: DetailPokemonRouterProtocol? { get set}
@@ -22,6 +23,13 @@ protocol DetailPokemonPresenterProtocol {
             PokemonSpeciesLocaleDataSource,
             PokemonSpeciesRemoteDataSource,
             PokemonSpeciesTransformer>>? { get set }
+    
+    var putCatchPokemonInteractor: Interactor<
+        CatchPokemonDomainModel?,
+        Bool,
+        PutCatchPokemonRepository<
+            CatchPokemonLocaleDataSource,
+            CatchPokemonTransformer>>? { get set }
     
 //    var toggleFavoriteInteractor: Interactor<
 //        PokemonDomainModel,
@@ -47,9 +55,9 @@ protocol DetailPokemonPresenterProtocol {
 }
 
 class DetailPokemonPresenter: DetailPokemonPresenterProtocol {
-    var pokemonInteractor: Interactor<Int, PokemonDomainModel, GetPokemonRepository<PokemonLocaleDataSource, PokemonTransformer>>?
+    var putCatchPokemonInteractor: Core.Interactor<CatchPokemon.CatchPokemonDomainModel?, Bool, CatchPokemon.PutCatchPokemonRepository<CatchPokemon.CatchPokemonLocaleDataSource, CatchPokemon.CatchPokemonTransformer>>?
     
-//    var toggleFavoriteInteractor: Interactor<PokemonDomainModel, Bool, ToggleFavoritePokemonRepository<PokemonLocaleDataSource, PokemonTransformer>>?
+    var pokemonInteractor: Interactor<Int, PokemonDomainModel, GetPokemonRepository<PokemonLocaleDataSource, PokemonTransformer>>?
     
     private let disposeBag = DisposeBag()
     
@@ -101,14 +109,17 @@ class DetailPokemonPresenter: DetailPokemonPresenterProtocol {
     
     func saveToggleFavorite(pokemon: PokemonDomainModel) {
         self.isLoadingData = true
-//        toggleFavoriteInteractor?.execute(request: pokemon)
-//            .observe(on: MainScheduler.instance)
-//            .subscribe { [weak self] _ in
-//                self?.view?.updateSaveToggleFavorite(with: pokemon.isFavorite)
-//            } onError: { error in
-//                self.view?.updateSaveToggleFavorite(with: error.localizedDescription)
-//            } onCompleted: {
-//                self.isLoadingData = false
-//            }.disposed(by: disposeBag)
+        
+        let catchModel = CatchPokemonDomainModel(catchId: UUID().uuidString, id: pokemon.id, name: pokemon.name, nickname: "Nickname", image: pokemon.image, type: pokemon.type, catchDate: Date())
+        
+        putCatchPokemonInteractor?.execute(request: catchModel)
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] _ in
+                self?.view?.updateSaveToggleFavorite(with: pokemon.isFavorite)
+            } onError: { error in
+                self.view?.updateSaveToggleFavorite(with: error.localizedDescription)
+            } onCompleted: {
+                self.isLoadingData = false
+            }.disposed(by: disposeBag)
     }
 }

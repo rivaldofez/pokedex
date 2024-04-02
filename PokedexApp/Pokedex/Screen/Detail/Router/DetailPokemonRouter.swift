@@ -37,7 +37,7 @@ class DetailPokemonRouter: DetailPokemonRouterProtocol {
         presenter.router = router
         presenter.view = view
         presenter.speciesInteractor = interactor
-//        presenter.toggleFavoriteInteractor = Injection().provideToggleFavorite()
+        presenter.putCatchPokemonInteractor = Injection().providePutCatchPokemon()
         presenter.pokemonInteractor = Injection().providePokemon()
         
         presenter.getPokemon(with: pokemon)
