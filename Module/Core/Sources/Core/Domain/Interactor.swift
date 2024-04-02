@@ -7,7 +7,7 @@
 
 import RxSwift
 
-public struct Interactor<Request, Response, R: Repository>: UserCase
+public struct Interactor<Request, Response, R: Repository>: UseCase
 where
 R.Request == Request,
 R.Response == Response {
