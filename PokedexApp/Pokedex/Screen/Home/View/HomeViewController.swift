@@ -12,7 +12,7 @@ import GeneralPokemon
 import Common
 
 protocol HomeViewProtocol {
-    var presenter: HomePokemonPresenterProtocol? { get set }
+    var presenter: HomePresenterProtocol? { get set }
     
     func updatePokemon(with pokemons: [PokemonDomainModel])
     func updatePokemon(with error: String)
@@ -20,7 +20,7 @@ protocol HomeViewProtocol {
 }
 
 class HomeViewController: UIViewController, HomeViewProtocol {
-    var presenter: HomePokemonPresenterProtocol?
+    var presenter: HomePresenterProtocol?
     
     private var pokemonDataPagination: [PokemonDomainModel] = []
     private let disposeBag = DisposeBag()

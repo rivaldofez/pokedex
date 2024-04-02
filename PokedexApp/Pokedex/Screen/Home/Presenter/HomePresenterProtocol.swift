@@ -10,7 +10,7 @@ import GeneralPokemon
 import Core
 import RxSwift
 
-protocol HomePokemonPresenterProtocol {
+protocol HomePresenterProtocol {
     var router: HomeRouterProtocol? { get set}
     var interactor: Interactor<
         Int,
@@ -28,7 +28,7 @@ protocol HomePokemonPresenterProtocol {
     func didSelectPokemonItem(with pokemon: PokemonDomainModel)
 }
 
-class HomePokemonPresenter: HomePokemonPresenterProtocol {
+class HomePresenter: HomePresenterProtocol {
     var interactor: Interactor<Int, [PokemonDomainModel], GetPokemonsRepository<PokemonLocaleDataSource, PokemonRemoteDataSource, PokemonsTransformer>>? {
         didSet {
             offsetPagination = 0
@@ -70,6 +70,7 @@ class HomePokemonPresenter: HomePokemonPresenterProtocol {
     
     func didSelectPokemonItem(with pokemon: PokemonDomainModel) {
         router?.gotoDetailPokemon(with: pokemon)
+        print("LOGDEBUG: called in home presenter detail")
     }
     
 }
