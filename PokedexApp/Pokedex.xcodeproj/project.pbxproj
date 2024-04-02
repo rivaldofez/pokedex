@@ -12,6 +12,10 @@
 		591C30312BBB2455005A5A5B /* ViewDataConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C30302BBB2455005A5A5B /* ViewDataConverter.swift */; };
 		591C30342BBB248D005A5A5B /* SpeciesPokemon in Frameworks */ = {isa = PBXBuildFile; productRef = 591C30332BBB248D005A5A5B /* SpeciesPokemon */; };
 		591C30392BBB24EB005A5A5B /* AboutCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C30382BBB24EB005A5A5B /* AboutCellModel.swift */; };
+		591C303B2BBB25B2005A5A5B /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C303A2BBB25B2005A5A5B /* HomeRouter.swift */; };
+		591C303D2BBB25CD005A5A5B /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C303C2BBB25CD005A5A5B /* HomePresenter.swift */; };
+		591C30402BBB263D005A5A5B /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C303F2BBB263D005A5A5B /* Injection.swift */; };
+		591C30432BBB26FA005A5A5B /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591C30422BBB26FA005A5A5B /* String+Ext.swift */; };
 		5968656E2BBA893000E8A6B6 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5968656D2BBA893000E8A6B6 /* Base */; };
 		59A196102BBB1FB3004F5DAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A1960D2BBB1FB3004F5DAC /* AppDelegate.swift */; };
 		59A196112BBB1FB3004F5DAC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A1960E2BBB1FB3004F5DAC /* SceneDelegate.swift */; };
@@ -30,6 +34,10 @@
 /* Begin PBXFileReference section */
 		591C30302BBB2455005A5A5B /* ViewDataConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewDataConverter.swift; path = Pokedex/Util/Mapper/ViewDataConverter.swift; sourceTree = SOURCE_ROOT; };
 		591C30382BBB24EB005A5A5B /* AboutCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AboutCellModel.swift; path = Pokedex/Core/Domain/Model/AboutCellModel.swift; sourceTree = SOURCE_ROOT; };
+		591C303A2BBB25B2005A5A5B /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeRouter.swift; path = Pokedex/Screen/Home/Router/HomeRouter.swift; sourceTree = SOURCE_ROOT; };
+		591C303C2BBB25CD005A5A5B /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomePresenter.swift; path = Pokedex/Screen/Home/Presenter/HomePresenter.swift; sourceTree = SOURCE_ROOT; };
+		591C303F2BBB263D005A5A5B /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Injection.swift; path = Pokedex/Core/Injection/Injection.swift; sourceTree = SOURCE_ROOT; };
+		591C30422BBB26FA005A5A5B /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Ext.swift"; path = "Pokedex/Util/Extension/String+Ext.swift"; sourceTree = SOURCE_ROOT; };
 		5968655E2BBA892D00E8A6B6 /* pokedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pokedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5968656D2BBA893000E8A6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5968656F2BBA893000E8A6B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -72,6 +80,7 @@
 		591C30352BBB24CD005A5A5B /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				591C303E2BBB2630005A5A5B /* Injection */,
 				591C30362BBB24D6005A5A5B /* Domain */,
 			);
 			path = Core;
@@ -91,6 +100,22 @@
 				591C30382BBB24EB005A5A5B /* AboutCellModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		591C303E2BBB2630005A5A5B /* Injection */ = {
+			isa = PBXGroup;
+			children = (
+				591C303F2BBB263D005A5A5B /* Injection.swift */,
+			);
+			path = Injection;
+			sourceTree = "<group>";
+		};
+		591C30412BBB26F2005A5A5B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				591C30422BBB26FA005A5A5B /* String+Ext.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		596865552BBA892D00E8A6B6 = {
@@ -183,6 +208,7 @@
 		59A1962B2BBB2127004F5DAC /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				591C303C2BBB25CD005A5A5B /* HomePresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -190,6 +216,7 @@
 		59A1962C2BBB212C004F5DAC /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				591C303A2BBB25B2005A5A5B /* HomeRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -197,6 +224,7 @@
 		59A1962D2BBB213F004F5DAC /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				591C30412BBB26F2005A5A5B /* Extension */,
 				591C302F2BBB2446005A5A5B /* Mapper */,
 				59A1962E2BBB2147004F5DAC /* Endpoint */,
 			);
@@ -313,7 +341,11 @@
 				59A196302BBB2153004F5DAC /* ApiCall.swift in Sources */,
 				59A196112BBB1FB3004F5DAC /* SceneDelegate.swift in Sources */,
 				59A196352BBB21F8004F5DAC /* PokemonCollectionViewCell.swift in Sources */,
+				591C30402BBB263D005A5A5B /* Injection.swift in Sources */,
+				591C303B2BBB25B2005A5A5B /* HomeRouter.swift in Sources */,
+				591C303D2BBB25CD005A5A5B /* HomePresenter.swift in Sources */,
 				59A196322BBB21DD004F5DAC /* HomeViewController.swift in Sources */,
+				591C30432BBB26FA005A5A5B /* String+Ext.swift in Sources */,
 				591C30312BBB2455005A5A5B /* ViewDataConverter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
