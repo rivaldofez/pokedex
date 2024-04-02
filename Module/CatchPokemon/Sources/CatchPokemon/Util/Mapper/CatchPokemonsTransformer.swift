@@ -17,13 +17,15 @@ public struct CatchPokemonsTransformer: Mapper {
     
     private let cpTransformer = CatchPokemonTransformer()
     
+    public init() {}
+    
     public func transformResponseToEntity(response: [Any]) -> [CatchPokemonEntity] {
         return []
     }
     
     public func transformEntityToDomain(entity: [CatchPokemonEntity]) -> [CatchPokemonDomainModel] {
         return entity.map {
-            cpTransformer.transformEntityToDomain(entity: $0)!
+            cpTransformer.transformEntityToDomain(entity: $0)
         }
     }
     
@@ -33,7 +35,7 @@ public struct CatchPokemonsTransformer: Mapper {
     
     public func transformDomainToEntity(domain: [CatchPokemonDomainModel]) -> [CatchPokemonEntity] {
         return domain.map {
-            cpTransformer.transformDomainToEntity(domain: $0)!
+            cpTransformer.transformDomainToEntity(domain: $0)
         }
     }
 }

@@ -9,41 +9,45 @@ import Core
 import Foundation
 
 public struct CatchPokemonTransformer: Mapper {
-    public typealias Response = Any?
+    public typealias Response = Any
     
-    public typealias Entity = CatchPokemonEntity?
+    public typealias Entity = CatchPokemonEntity
     
-    public typealias Domain = CatchPokemonDomainModel?
+    public typealias Domain = CatchPokemonDomainModel
     
-    public func transformResponseToEntity(response: Any?) -> CatchPokemonEntity? {
-        return nil
+    public init() {
+        
     }
     
-    public func transformEntityToDomain(entity: CatchPokemonEntity?) -> CatchPokemonDomainModel? {
+    public func transformResponseToEntity(response: Any) -> CatchPokemonEntity {
+        return CatchPokemonEntity()
+    }
+    
+    public func transformEntityToDomain(entity: CatchPokemonEntity) -> CatchPokemonDomainModel {
         return CatchPokemonDomainModel(
-            catchId: entity?.catchId ?? "",
-            id: entity?.id ?? 0,
-            name: entity?.name ?? "",
-            nickname: entity?.nickname ?? "",
-            image: entity?.image ?? "",
-            type: (entity?.type ?? "").components(separatedBy: ","),
-            catchDate: entity?.catchDate ?? Date()
+            catchId: entity.catchId,
+            id: entity.id,
+            name: entity.name,
+            nickname: entity.nickname,
+            image: entity.image,
+            type: (entity.type).components(separatedBy: ","),
+            catchDate: entity.catchDate
         )
     }
     
-    public func transformResponseToDomain(response: Any?) -> CatchPokemonDomainModel? {
-        return nil
+    public func transformResponseToDomain(response: Any) -> CatchPokemonDomainModel {
+        return CatchPokemonDomainModel(catchId: "", id: 0, name: "", nickname: "", image: "", type: [], catchDate: Date())
     }
     
-    public func transformDomainToEntity(domain: CatchPokemonDomainModel?) -> CatchPokemonEntity? {
+    public func transformDomainToEntity(domain: CatchPokemonDomainModel) -> CatchPokemonEntity {
         let cpEntity = CatchPokemonEntity()
-        cpEntity.catchId = domain?.catchId ?? ""
-        cpEntity.id = domain?.id ?? 0
-        cpEntity.name = domain?.name ?? ""
-        cpEntity.nickname = domain?.nickname ?? ""
-        cpEntity.image = domain?.image ?? ""
-        cpEntity.type = (domain?.type ?? []).joined(separator: ",")
-        cpEntity.catchDate = domain?.catchDate ?? Date()
+        cpEntity.catchId = domain.catchId
+        cpEntity.id = domain.id
+        cpEntity.name = domain.name
+        cpEntity.nickname = domain.nickname
+        cpEntity.image = domain.image
+        cpEntity.type = (domain.type).joined(separator: ",")
+        cpEntity.catchDate = domain.catchDate
         
         return cpEntity
     }
