@@ -36,7 +36,7 @@ class HomeRouter: HomeRouterProtocol {
                 PokemonRemoteDataSource,
                 PokemonsTransformer>> = Injection().providePokemons()
             
-        let presenter = HomePokemonPresenter()
+        let presenter = HomePresenter()
         
         view.presenter = presenter
         presenter.router = router
@@ -49,12 +49,12 @@ class HomeRouter: HomeRouterProtocol {
     }
     
     func gotoDetailPokemon(with pokemon: PokemonDomainModel) {
-//        let detailPokemonRouter = DetailPokemonRouter.createDetailPokemon(with: pokemon)
-//        guard let detailPokemonView = detailPokemonRouter.entry else { return }
-//        guard let viewController = self.entry else { return }
-//        
-//        viewController.hidesBottomBarWhenPushed = true
-//        viewController.navigationController?.pushViewController(detailPokemonView, animated: true)
-//        viewController.hidesBottomBarWhenPushed = false
+        let detailPokemonRouter = DetailPokemonRouter.createDetailPokemon(with: pokemon)
+        guard let detailPokemonView = detailPokemonRouter.entry else { return }
+        guard let viewController = self.entry else { return }
+        
+        viewController.hidesBottomBarWhenPushed = true
+        viewController.navigationController?.pushViewController(detailPokemonView, animated: true)
+        viewController.hidesBottomBarWhenPushed = false
     }
 }
