@@ -12,6 +12,10 @@ import RxSwift
 
 public struct CatchPokemonLocaleDataSource: LocaleDataSource {
     
+    public typealias Request = String
+    
+    public typealias Response = CatchPokemonEntity
+    
     private let _realm: Realm
     
     public init(realm: Realm) {
@@ -105,7 +109,26 @@ public struct CatchPokemonLocaleDataSource: LocaleDataSource {
         }
     }
     
-    public typealias Request = String
-    
-    public typealias Response = CatchPokemonEntity
+    public func delete(entity: CatchPokemonEntity) -> Observable<Bool> {
+        let id = entity.catchId
+        let pokeRes = _realm.objects(CatchPokemonEntity.self).filter("catchId == %@", id).first
+        
+        return Observable<Bool>.create { observer in
+            if let pokeRes = pokeRes {
+                do {
+                    try _realm.write {
+                        _realm.delete(pokeRes)
+                    }
+                    observer.onNext(true)
+                    observer.onCompleted()
+                } catch {
+                    observer.onError(DatabaseError.invalidInstance)
+                }
+            } else {
+                observer.onNext(false)
+                observer.onCompleted()
+            }
+            return Disposables.create()
+        }
+    }
 }
