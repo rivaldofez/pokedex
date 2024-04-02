@@ -31,16 +31,26 @@ protocol CatchedPokemonPresenterProtocol {
             CatchPokemonLocaleDataSource,
             CatchPokemonTransformer>>? { get set }
     
+    var releaseCatchPokemonInteractor: Interactor<
+        CatchPokemonDomainModel?,
+        Bool,
+        ReleaseCatchPokemonRepository<
+            CatchPokemonLocaleDataSource,
+            CatchPokemonTransformer>>? { get set }
+    
     
     var view: CatchedPokemonViewProtocol? { get set }
     
     var isLoadingData: Bool { get set }
     func getSearchPokemon(query: String?)
     func didSelectPokemonItem(with pokemon: CatchPokemonDomainModel)
-    func saveToggleFavorite(pokemon: CatchPokemonDomainModel)
+    func releaseCatchPokemon(with pokemon: CatchPokemonDomainModel)
+    func putUpdateCatchPokemon(with pokemon: CatchPokemonDomainModel)
 }
 
 class CatchedPokemonPresenter: CatchedPokemonPresenterProtocol {
+    var releaseCatchPokemonInteractor: Core.Interactor<CatchPokemon.CatchPokemonDomainModel?, Bool, CatchPokemon.ReleaseCatchPokemonRepository<CatchPokemon.CatchPokemonLocaleDataSource, CatchPokemon.CatchPokemonTransformer>>?
+    
     var getCatchPokemonInteractor: Core.Interactor<String, [CatchPokemon.CatchPokemonDomainModel], CatchPokemon.GetCatchPokemonRepository<CatchPokemon.CatchPokemonLocaleDataSource, CatchPokemon.CatchPokemonsTransformer>>?
     
     var putCatchPokemonInteractor: Core.Interactor<CatchPokemon.CatchPokemonDomainModel?, Bool, CatchPokemon.PutCatchPokemonRepository<CatchPokemon.CatchPokemonLocaleDataSource, CatchPokemon.CatchPokemonTransformer>>?
@@ -63,25 +73,36 @@ class CatchedPokemonPresenter: CatchedPokemonPresenterProtocol {
         getCatchPokemonInteractor?.execute(request: query)
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] pokemonResults in
-                self?.view?.updatePokemonFavorite(with: pokemonResults)
+                self?.view?.updateMyPokemon(with: pokemonResults)
             } onError: { error in
-                self.view?.updatePokemonFavorite(with: error.localizedDescription)
+                self.view?.updateMyPokemon(with: error.localizedDescription)
             } onCompleted: {
                 self.isLoadingData = false
             }.disposed(by: disposeBag)
     }
     
     func didSelectPokemonItem(with pokemon: CatchPokemonDomainModel) {
+        
         //        router?.gotoDetailPokemon(with: pokemon)
     }
     
-    func saveToggleFavorite(pokemon: CatchPokemonDomainModel) {
+    func putUpdateCatchPokemon(with pokemon: CatchPokemonDomainModel) {
         putCatchPokemonInteractor?.execute(request: pokemon)
-            .observe(on: MainScheduler.instance)
             .subscribe { [weak self] state in
-                self?.view?.updateSaveToggleFavorite(with: state )
+//                self?.view?.updateReleasePokemon(with: state )
             } onError: { error in
-                self.view?.updateSaveToggleFavorite(with: error.localizedDescription)
+                self.view?.updateReleasePokemon(with: error.localizedDescription)
+            } onCompleted: {
+                self.isLoadingData = false
+            }.disposed(by: disposeBag)
+    }
+    
+    func releaseCatchPokemon(with pokemon: CatchPokemonDomainModel) {
+        releaseCatchPokemonInteractor?.execute(request: pokemon)
+            .subscribe { [weak self] state in
+                self?.view?.updateReleasePokemon(with: state )
+            } onError: { error in
+                self.view?.updateReleasePokemon(with: error.localizedDescription)
             } onCompleted: {
                 self.isLoadingData = false
             }.disposed(by: disposeBag)
