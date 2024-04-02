@@ -16,4 +16,5 @@ public protocol LocaleDataSource {
     func inserts(entities: [Response]) -> Observable<Bool>
     func insert(entity: Response) -> Observable<Bool>
     func update(entity: Response) -> Observable<Bool>
+    func delete(entity: Response) -> Observable<Bool>
 }
