@@ -19,7 +19,7 @@ class MainTabBarController: UITabBarController {
         let homeRouter = HomeRouter.start()
         guard let homeVC = homeRouter.entry else { return }
         
-        let homeNavItem = self.createNav(with: "title.pokemon".localized(), and: UIImage(systemName: "list.bullet.below.rectangle"), vc: homeVC)
+        let homeNavItem = self.createNav(with: "title.pokemon".localized(), and: UIImage(systemName: "house"), vc: homeVC)
         
         let catchRouter = CatchedPokemonRouter.createCatched()
         guard let catchVC = catchRouter.entry else { return }

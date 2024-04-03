@@ -91,7 +91,7 @@ class CatchedPokemonPresenter: CatchedPokemonPresenterProtocol {
         pokemonInteractor?.execute(request: pokemon.id)
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] pokemonResult in
-                self?.router?.gotoDetailPokemon(with: pokemonResult)
+                self?.router?.gotoDetailPokemon(with: pokemonResult, nickname: pokemon.nickname)
             }
             .disposed(by: disposeBag)
     }

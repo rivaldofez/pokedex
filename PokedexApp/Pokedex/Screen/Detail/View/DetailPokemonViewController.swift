@@ -16,7 +16,7 @@ protocol DetailPokemonViewProtocol {
     
     func updatePokemonSpecies(with pokemonSpecies: PokemonSpeciesDomainModel)
     func updatePokemonSpecies(with error: String)
-    func updatePokemon(with pokemon: PokemonDomainModel)
+    func updatePokemon(with pokemon: PokemonDomainModel, nickname: String?)
     func updatePutCatchPokemonResult(with error: String)
     func updatePutCatchPokemonResult(with state: Bool)
     func isLoadingData(with state: Bool)
@@ -45,7 +45,14 @@ class DetailPokemonViewController:
         showError(isError: false)
     }
     
-    func updatePokemon(with pokemon: PokemonDomainModel) {
+    func updatePokemon(with pokemon: PokemonDomainModel, nickname: String?) {
+        if nickname == nil {
+            pokemonNickNameLabel.isHidden = true
+        } else {
+            pokemonNickNameLabel.isHidden = false
+            pokemonNickNameLabel.text = nickname
+        }
+        
         self.pokemon = pokemon
         
         aboutSubViewController.pokemon = pokemon
@@ -166,6 +173,16 @@ class DetailPokemonViewController:
         return imageview
     }()
     
+    private let pokemonNickNameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .secondaryLabel
+        label.font = .poppinsBold(size: 12)
+        label.textAlignment = .left
+        
+        return label
+    }()
+    
     // Loading View
     private lazy var loadingAnimation: LottieAnimationView = {
         let lottie = LottieAnimationView(name: "loading")
@@ -220,6 +237,7 @@ class DetailPokemonViewController:
         
         view.addSubview(pokemonTypeStackView)
         view.addSubview(pokemonImageView)
+        view.addSubview(pokemonNickNameLabel)
         view.addSubview(sectionStackView)
         view.addSubview(indicator)
         view.addSubview(sectionViewContainer)
@@ -261,9 +279,15 @@ class DetailPokemonViewController:
     // MARK: Auto Layout Constraints
     private func configureConstraints() {
         let pokemonImageViewConstraints = [
-            pokemonImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            pokemonImageView.topAnchor.constraint(equalTo: pokemonNickNameLabel.bottomAnchor, constant: 8),
             pokemonImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pokemonImageView.heightAnchor.constraint(equalToConstant: min(view.frame.width/2, view.frame.height/2))
+        ]
+        
+        let pokemonNickNameLabelConstraints = [
+            pokemonNickNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 2),
+            pokemonNickNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            pokemonNickNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ]
         
         let pokemonTypeStackViewConstraints = [
@@ -314,6 +338,7 @@ class DetailPokemonViewController:
         ]
         
         NSLayoutConstraint.activate(pokemonImageViewConstraints)
+        NSLayoutConstraint.activate(pokemonNickNameLabelConstraints)
         NSLayoutConstraint.activate(pokemonTypeStackViewConstraints)
         NSLayoutConstraint.activate(sectionStackViewConstraints)
         NSLayoutConstraint.activate(indicatorConstraints)

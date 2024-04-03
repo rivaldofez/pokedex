@@ -43,7 +43,7 @@ protocol DetailPokemonPresenterProtocol {
     var isLoadingData: Bool { get set}
     
     func getPokemonSpecies(id: Int)
-    func getPokemon(with pokemon: PokemonDomainModel)
+    func getPokemon(with pokemon: PokemonDomainModel, nickname: String?)
     func putCatchedPokemon(pokemon: PokemonDomainModel, nickname: String)
     func catchProbState() -> Bool
 }
@@ -86,9 +86,9 @@ class DetailPokemonPresenter: DetailPokemonPresenterProtocol {
         
     }
     
-    func getPokemon(with pokemon: PokemonDomainModel) {
+    func getPokemon(with pokemon: PokemonDomainModel, nickname: String?) {
         isLoadingData = true
-        self.view?.updatePokemon(with: pokemon)
+        self.view?.updatePokemon(with: pokemon, nickname: nickname)
         self.getPokemonSpecies(id: pokemon.id)
     }
     

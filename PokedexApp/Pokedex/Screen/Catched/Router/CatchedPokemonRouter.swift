@@ -14,7 +14,7 @@ protocol CatchedPokemonRouterProtocol {
     
     static func createCatched() -> CatchedPokemonRouterProtocol
     
-    func gotoDetailPokemon(with pokemon: PokemonDomainModel )
+    func gotoDetailPokemon(with pokemon: PokemonDomainModel, nickname: String)
 }
 
 class CatchedPokemonRouter: CatchedPokemonRouterProtocol {
@@ -40,8 +40,8 @@ class CatchedPokemonRouter: CatchedPokemonRouterProtocol {
         return router
     }
     
-    func gotoDetailPokemon(with pokemon: PokemonDomainModel) {
-        let detailPokemonRouter = DetailPokemonRouter.createDetailPokemon(with: pokemon)
+    func gotoDetailPokemon(with pokemon: PokemonDomainModel, nickname: String) {
+        let detailPokemonRouter = DetailPokemonRouter.createDetailPokemon(with: pokemon, nickname: nickname)
         guard let detailPokemonView = detailPokemonRouter.entry else { return }
         guard let viewController = self.entry else { return }
         

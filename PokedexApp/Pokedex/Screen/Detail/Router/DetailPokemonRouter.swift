@@ -13,13 +13,13 @@ import SpeciesPokemon
 protocol DetailPokemonRouterProtocol {
     var entry: DetailPokemonViewController? { get }
     
-    static func createDetailPokemon(with pokemon: PokemonDomainModel) -> DetailPokemonRouterProtocol
+    static func createDetailPokemon(with pokemon: PokemonDomainModel, nickname: String?) -> DetailPokemonRouterProtocol
 }
 
 class DetailPokemonRouter: DetailPokemonRouterProtocol {
     var entry: DetailPokemonViewController?
     
-    static func createDetailPokemon(with pokemon: PokemonDomainModel) -> DetailPokemonRouterProtocol {
+    static func createDetailPokemon(with pokemon: PokemonDomainModel, nickname: String? = nil) -> DetailPokemonRouterProtocol {
         
         let router = DetailPokemonRouter()
         var view: DetailPokemonViewProtocol = DetailPokemonViewController()
@@ -40,7 +40,7 @@ class DetailPokemonRouter: DetailPokemonRouterProtocol {
         presenter.putCatchPokemonInteractor = Injection().providePutCatchPokemon()
         presenter.pokemonInteractor = Injection().providePokemon()
         
-        presenter.getPokemon(with: pokemon)
+        presenter.getPokemon(with: pokemon, nickname: nickname)
         router.entry = view as? DetailPokemonViewController
         
         return router
