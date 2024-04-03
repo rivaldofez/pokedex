@@ -10,6 +10,7 @@ import Lottie
 import GeneralPokemon
 import SpeciesPokemon
 import Common
+import SDWebImage
 
 protocol DetailPokemonViewProtocol {
     var presenter: DetailPokemonPresenterProtocol? { get set }
@@ -170,6 +171,7 @@ class DetailPokemonViewController:
         let imageview = UIImageView()
         imageview.translatesAutoresizingMaskIntoConstraints = false
         imageview.contentMode = .scaleAspectFit
+        imageview.sd_imageIndicator = SDWebImageActivityIndicator.gray
         return imageview
     }()
     

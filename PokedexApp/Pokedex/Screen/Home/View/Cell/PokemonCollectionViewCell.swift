@@ -20,6 +20,7 @@ class PokemonCollectionViewCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.alpha = 1
         imageView.clipsToBounds = true
+        imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
         
         return imageView
     }()
