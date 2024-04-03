@@ -31,7 +31,6 @@ class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol
     private let disposeBag = DisposeBag()
     
     // MARK: View Components
-    // Favorite Table View
     private lazy var pokemonTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
