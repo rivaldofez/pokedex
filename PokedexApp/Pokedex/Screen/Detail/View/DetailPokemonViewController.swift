@@ -218,12 +218,6 @@ class DetailPokemonViewController:
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .label
         
-        //        let attrs = [
-        //            NSAttributedString.Key.font: UIFont.poppinsBold(size: 34)
-        //        ]
-        //
-        //        navigationController?.navigationBar.largeTitleTextAttributes = attrs as [NSAttributedString.Key: Any]
-        
         view.addSubview(pokemonTypeStackView)
         view.addSubview(pokemonImageView)
         view.addSubview(sectionStackView)

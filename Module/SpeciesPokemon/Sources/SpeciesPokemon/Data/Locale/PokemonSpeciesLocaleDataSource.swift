@@ -101,7 +101,8 @@ public struct PokemonSpeciesLocaleDataSource: LocaleDataSource {
     
     public func delete(entity: PokemonSpeciesEntity) -> Observable<Bool> {
         let id = entity.id
-        let pokeRes = _realm.objects(PokemonSpeciesEntity.self).filter("id == %@", id).first
+        let pokeRes = _realm.object(ofType: PokemonSpeciesEntity.self,
+                                   forPrimaryKey: id)
         
         return Observable<Bool>.create { observer in
             if let pokeRes = pokeRes {

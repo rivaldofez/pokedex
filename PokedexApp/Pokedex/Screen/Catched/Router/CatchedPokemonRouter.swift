@@ -32,6 +32,8 @@ class CatchedPokemonRouter: CatchedPokemonRouterProtocol {
         presenter.getCatchPokemonInteractor = Injection().provideGetCatchPokemon()
         presenter.putCatchPokemonInteractor = Injection().providePutCatchPokemon()
         presenter.releaseCatchPokemonInteractor = Injection().provideReleaseCatchPokemon()
+        presenter.pokemonInteractor = Injection().providePokemon()
+        
         
         router.entry = view as? CatchedPokemonViewController
         

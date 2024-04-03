@@ -88,17 +88,8 @@ class DetailPokemonPresenter: DetailPokemonPresenterProtocol {
     
     func getPokemon(with pokemon: PokemonDomainModel) {
         isLoadingData = true
-        
-        pokemonInteractor?.execute(request: pokemon.id)
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] pokemonResult in
-                self?.view?.updatePokemon(with: pokemonResult)
-            } onError: { _ in
-                self.view?.updatePokemon(with: pokemon)
-                self.getPokemonSpecies(id: pokemon.id)
-            } onCompleted: {
-                self.getPokemonSpecies(id: pokemon.id)
-            }.disposed(by: disposeBag)
+        self.view?.updatePokemon(with: pokemon)
+        self.getPokemonSpecies(id: pokemon.id)
     }
     
     func putCatchedPokemon(pokemon: PokemonDomainModel, nickname: String) {

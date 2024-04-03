@@ -22,6 +22,7 @@
 "title.hooray" = "Hooray~";
 "title.ooops" = "Ooops!";
 "title.gotcha" = "Gotcha!";
+"title.radar.view" = "Mode Radar";
 
 
 "msg.success.released.pokemon" = "Bye-bye teman, maaf kamu harus dilepas, sampai jumpa lagi :)";

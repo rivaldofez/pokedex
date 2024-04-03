@@ -153,7 +153,6 @@ class CatchedPokemonViewController: UIViewController, CatchedPokemonViewProtocol
     }
     
     // MARK: Presenter Action
-    
     func updateReleasePokemon(with error: String) {
         showCommonAlert(title: "title.error.occured".localized(), message: "msg.error.process.request".localized())
         presenter?.getSearchPokemon(query: nil)

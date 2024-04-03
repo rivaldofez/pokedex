@@ -24,7 +24,7 @@ class MainTabBarController: UITabBarController {
         let catchRouter = CatchedPokemonRouter.createCatched()
         guard let catchVC = catchRouter.entry else { return }
         
-        let catchNavItem = self.createNav(with: "title.my.pokemon".localized(), and: UIImage(systemName: "heart"), vc: catchVC)
+        let catchNavItem = self.createNav(with: "title.my.pokemon".localized(), and: UIImage(systemName: "desktopcomputer"), vc: catchVC)
         
         self.setViewControllers([homeNavItem, catchNavItem], animated: true)
     }

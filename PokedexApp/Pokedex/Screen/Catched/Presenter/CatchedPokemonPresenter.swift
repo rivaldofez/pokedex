@@ -35,6 +35,13 @@ protocol CatchedPokemonPresenterProtocol {
             CatchPokemonLocaleDataSource,
             CatchPokemonTransformer>>? { get set }
     
+    var pokemonInteractor: Interactor<
+        Int,
+        PokemonDomainModel,
+        GetPokemonRepository<
+            PokemonLocaleDataSource,
+            PokemonTransformer>>? { get set }
+    
     
     var view: CatchedPokemonViewProtocol? { get set }
     
@@ -46,6 +53,8 @@ protocol CatchedPokemonPresenterProtocol {
 }
 
 class CatchedPokemonPresenter: CatchedPokemonPresenterProtocol {
+    var pokemonInteractor: Core.Interactor<Int, GeneralPokemon.PokemonDomainModel, GeneralPokemon.GetPokemonRepository<GeneralPokemon.PokemonLocaleDataSource, GeneralPokemon.PokemonTransformer>>?
+    
     var releaseCatchPokemonInteractor: Core.Interactor<CatchPokemon.CatchPokemonDomainModel?, Bool, CatchPokemon.ReleaseCatchPokemonRepository<CatchPokemon.CatchPokemonLocaleDataSource, CatchPokemon.CatchPokemonTransformer>>?
     
     var getCatchPokemonInteractor: Core.Interactor<String, [CatchPokemon.CatchPokemonDomainModel], CatchPokemon.GetCatchPokemonRepository<CatchPokemon.CatchPokemonLocaleDataSource, CatchPokemon.CatchPokemonsTransformer>>?
@@ -79,16 +88,20 @@ class CatchedPokemonPresenter: CatchedPokemonPresenterProtocol {
     }
     
     func didSelectPokemonItem(with pokemon: CatchPokemonDomainModel) {
-        
-        //        router?.gotoDetailPokemon(with: pokemon)
+        pokemonInteractor?.execute(request: pokemon.id)
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] pokemonResult in
+                self?.router?.gotoDetailPokemon(with: pokemonResult)
+            }
+            .disposed(by: disposeBag)
     }
     
     func putUpdateCatchPokemon(with pokemon: CatchPokemonDomainModel) {
         putCatchPokemonInteractor?.execute(request: pokemon)
             .subscribe { [weak self] state in
-//                self?.view?.updateReleasePokemon(with: state )
+                self?.view?.updateEditPokemon(with: state)
             } onError: { error in
-                self.view?.updateReleasePokemon(with: error.localizedDescription)
+                self.view?.updateEditPokemon(with: error.localizedDescription)
             } onCompleted: {
                 self.isLoadingData = false
             }.disposed(by: disposeBag)

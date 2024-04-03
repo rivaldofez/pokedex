@@ -12,6 +12,10 @@ import SpeciesPokemon
 import GeneralPokemon
 import CatchPokemon
 
+
+
+
+
 final class Injection: NSObject {
     private let realm = try? Realm()
             

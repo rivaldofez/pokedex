@@ -71,5 +71,4 @@ class HomePresenter: HomePresenterProtocol {
     func didSelectPokemonItem(with pokemon: PokemonDomainModel) {
         router?.gotoDetailPokemon(with: pokemon)
     }
-    
 }
