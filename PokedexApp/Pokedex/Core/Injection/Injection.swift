@@ -13,8 +13,17 @@ import GeneralPokemon
 import CatchPokemon
 
 
+typealias PokemonInteractor = Core.Interactor<Int, GeneralPokemon.PokemonDomainModel, GeneralPokemon.GetPokemonRepository<GeneralPokemon.PokemonLocaleDataSource, GeneralPokemon.PokemonTransformer>>
 
+typealias ReleaseCatchPokemonInteractor = Core.Interactor<CatchPokemon.CatchPokemonDomainModel?, Bool, CatchPokemon.ReleaseCatchPokemonRepository<CatchPokemon.CatchPokemonLocaleDataSource, CatchPokemon.CatchPokemonTransformer>>
 
+typealias PutCatchPokemonInteractor = Core.Interactor<CatchPokemonDomainModel?,Bool,PutCatchPokemonRepository<CatchPokemonLocaleDataSource,CatchPokemonTransformer>>
+
+typealias GetCatchPokemonInteractor = Core.Interactor<String, [CatchPokemon.CatchPokemonDomainModel], CatchPokemon.GetCatchPokemonRepository<CatchPokemon.CatchPokemonLocaleDataSource, CatchPokemon.CatchPokemonsTransformer>>
+
+typealias PokemonSpeciesInteractor = Core.Interactor<Int, SpeciesPokemon.PokemonSpeciesDomainModel?, SpeciesPokemon.GetPokemonSpeciesRepository<SpeciesPokemon.PokemonSpeciesLocaleDataSource, SpeciesPokemon.PokemonSpeciesRemoteDataSource, SpeciesPokemon.PokemonSpeciesTransformer>>
+
+typealias PokemonsInteractor = Interactor<Int, [PokemonDomainModel], GetPokemonsRepository<PokemonLocaleDataSource, PokemonRemoteDataSource, PokemonsTransformer>>
 
 final class Injection: NSObject {
     private let realm = try? Realm()

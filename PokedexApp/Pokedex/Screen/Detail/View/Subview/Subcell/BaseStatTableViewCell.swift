@@ -9,7 +9,7 @@ import UIKit
 import GeneralPokemon
 
 class BaseStatTableViewCell: UITableViewCell {
-    static let identifier = "BaseStatTableViewCell"
+    static let identifier = String(describing: BaseStatTableViewCell.self)
     
     private let titleLabel: UILabel = {
         let label = UILabel()

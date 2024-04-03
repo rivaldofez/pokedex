@@ -11,7 +11,7 @@ import GeneralPokemon
 import Common
 
 class PokemonCollectionViewCell: UICollectionViewCell {
-    static let identifier = "PokemonCollectionViewCell"
+    static let identifier = String(describing: PokemonCollectionViewCell.self)
     
     // MARK: View Components
     private let pokemonImageView: UIImageView = {

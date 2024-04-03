@@ -12,24 +12,17 @@ import RxSwift
 
 protocol HomePresenterProtocol {
     var router: HomeRouterProtocol? { get set}
-    var interactor: Interactor<
-        Int,
-        [PokemonDomainModel],
-        GetPokemonsRepository<
-            PokemonLocaleDataSource,
-            PokemonRemoteDataSource,
-            PokemonsTransformer>>? { get set }
+    var interactor: PokemonsInteractor? { get set }
     var view: HomeViewProtocol? { get set }
     
     var offsetPagination: Int? { get set }
     var isLoadingData: Bool { get set }
-    
     func getPokemonPagination(offset: Int)
     func didSelectPokemonItem(with pokemon: PokemonDomainModel)
 }
 
 class HomePresenter: HomePresenterProtocol {
-    var interactor: Interactor<Int, [PokemonDomainModel], GetPokemonsRepository<PokemonLocaleDataSource, PokemonRemoteDataSource, PokemonsTransformer>>? {
+    var interactor: PokemonsInteractor? {
         didSet {
             offsetPagination = 0
         }

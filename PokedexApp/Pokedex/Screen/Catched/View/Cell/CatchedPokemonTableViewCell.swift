@@ -9,7 +9,7 @@ import UIKit
 import CatchPokemon
 
 class CatchedPokemonTableViewCell: UITableViewCell {
-    static let identifier = "CatchedPokemonTableViewCell"
+    static let identifier = String(describing: CatchedPokemonTableViewCell.self)
     
     // MARK: View Components
     private let pokemonImageView: UIImageView = {

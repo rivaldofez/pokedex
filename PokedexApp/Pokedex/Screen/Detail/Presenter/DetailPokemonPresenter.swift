@@ -16,32 +16,13 @@ import CatchPokemon
 protocol DetailPokemonPresenterProtocol {
     var router: DetailPokemonRouterProtocol? { get set}
     
-    var speciesInteractor: Interactor<
-        Int,
-        PokemonSpeciesDomainModel?,
-        GetPokemonSpeciesRepository<
-            PokemonSpeciesLocaleDataSource,
-            PokemonSpeciesRemoteDataSource,
-            PokemonSpeciesTransformer>>? { get set }
-    
-    var putCatchPokemonInteractor: Interactor<
-        CatchPokemonDomainModel?,
-        Bool,
-        PutCatchPokemonRepository<
-            CatchPokemonLocaleDataSource,
-            CatchPokemonTransformer>>? { get set }
-    
-    var pokemonInteractor: Interactor<
-        Int,
-        PokemonDomainModel,
-        GetPokemonRepository<
-            PokemonLocaleDataSource,
-            PokemonTransformer>>? { get set }
+    var speciesInteractor: PokemonSpeciesInteractor? { get set }
+    var putCatchPokemonInteractor: PutCatchPokemonInteractor? { get set }
+    var pokemonInteractor: PokemonInteractor? { get set }
     
     var view: DetailPokemonViewProtocol? { get set }
     
     var isLoadingData: Bool { get set}
-    
     func getPokemonSpecies(id: Int)
     func getPokemon(with pokemon: PokemonDomainModel, nickname: String?)
     func putCatchedPokemon(pokemon: PokemonDomainModel, nickname: String)
@@ -49,7 +30,7 @@ protocol DetailPokemonPresenterProtocol {
 }
 
 class DetailPokemonPresenter: DetailPokemonPresenterProtocol {
-    var putCatchPokemonInteractor: Core.Interactor<CatchPokemon.CatchPokemonDomainModel?, Bool, CatchPokemon.PutCatchPokemonRepository<CatchPokemon.CatchPokemonLocaleDataSource, CatchPokemon.CatchPokemonTransformer>>?
+    var putCatchPokemonInteractor: PutCatchPokemonInteractor?
     
     var pokemonInteractor: Interactor<Int, PokemonDomainModel, GetPokemonRepository<PokemonLocaleDataSource, PokemonTransformer>>?
     
@@ -57,7 +38,7 @@ class DetailPokemonPresenter: DetailPokemonPresenterProtocol {
     
     var router: DetailPokemonRouterProtocol?
     
-    var speciesInteractor: Core.Interactor<Int, SpeciesPokemon.PokemonSpeciesDomainModel?, SpeciesPokemon.GetPokemonSpeciesRepository<SpeciesPokemon.PokemonSpeciesLocaleDataSource, SpeciesPokemon.PokemonSpeciesRemoteDataSource, SpeciesPokemon.PokemonSpeciesTransformer>>?
+    var speciesInteractor: PokemonSpeciesInteractor?
     
     var view: DetailPokemonViewProtocol?
     

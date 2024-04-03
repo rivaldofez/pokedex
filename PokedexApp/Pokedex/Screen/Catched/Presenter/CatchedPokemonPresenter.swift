@@ -14,34 +14,10 @@ import RxSwift
 protocol CatchedPokemonPresenterProtocol {
     var router: CatchedPokemonRouterProtocol? { get set }
     
-    var getCatchPokemonInteractor: Interactor<
-        String,
-        [CatchPokemonDomainModel],
-        GetCatchPokemonRepository<
-            CatchPokemonLocaleDataSource,
-            CatchPokemonsTransformer>>? { get set }
-    
-    var putCatchPokemonInteractor: Interactor<
-        CatchPokemonDomainModel?,
-        Bool,
-        PutCatchPokemonRepository<
-            CatchPokemonLocaleDataSource,
-            CatchPokemonTransformer>>? { get set }
-    
-    var releaseCatchPokemonInteractor: Interactor<
-        CatchPokemonDomainModel?,
-        Bool,
-        ReleaseCatchPokemonRepository<
-            CatchPokemonLocaleDataSource,
-            CatchPokemonTransformer>>? { get set }
-    
-    var pokemonInteractor: Interactor<
-        Int,
-        PokemonDomainModel,
-        GetPokemonRepository<
-            PokemonLocaleDataSource,
-            PokemonTransformer>>? { get set }
-    
+    var getCatchPokemonInteractor: GetCatchPokemonInteractor? { get set }
+    var putCatchPokemonInteractor: PutCatchPokemonInteractor? { get set }
+    var releaseCatchPokemonInteractor: ReleaseCatchPokemonInteractor? { get set }
+    var pokemonInteractor:PokemonInteractor? { get set }
     
     var view: CatchedPokemonViewProtocol? { get set }
     
@@ -53,13 +29,13 @@ protocol CatchedPokemonPresenterProtocol {
 }
 
 class CatchedPokemonPresenter: CatchedPokemonPresenterProtocol {
-    var pokemonInteractor: Core.Interactor<Int, GeneralPokemon.PokemonDomainModel, GeneralPokemon.GetPokemonRepository<GeneralPokemon.PokemonLocaleDataSource, GeneralPokemon.PokemonTransformer>>?
+    var pokemonInteractor: PokemonInteractor?
     
-    var releaseCatchPokemonInteractor: Core.Interactor<CatchPokemon.CatchPokemonDomainModel?, Bool, CatchPokemon.ReleaseCatchPokemonRepository<CatchPokemon.CatchPokemonLocaleDataSource, CatchPokemon.CatchPokemonTransformer>>?
+    var releaseCatchPokemonInteractor: ReleaseCatchPokemonInteractor?
     
-    var getCatchPokemonInteractor: Core.Interactor<String, [CatchPokemon.CatchPokemonDomainModel], CatchPokemon.GetCatchPokemonRepository<CatchPokemon.CatchPokemonLocaleDataSource, CatchPokemon.CatchPokemonsTransformer>>?
+    var getCatchPokemonInteractor: GetCatchPokemonInteractor?
     
-    var putCatchPokemonInteractor: Core.Interactor<CatchPokemon.CatchPokemonDomainModel?, Bool, CatchPokemon.PutCatchPokemonRepository<CatchPokemon.CatchPokemonLocaleDataSource, CatchPokemon.CatchPokemonTransformer>>?
+    var putCatchPokemonInteractor: PutCatchPokemonInteractor?
     
     private let disposeBag = DisposeBag()
     
