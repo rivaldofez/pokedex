@@ -13,7 +13,7 @@ public class CatchPokemonDomainModel: Identifiable {
     public var name: String
     public var nickname: String
     public var image: String
-    public var type: String
+    public var type: [String]
     public var catchDate: Date
 
     public init(
@@ -22,7 +22,7 @@ public class CatchPokemonDomainModel: Identifiable {
         name: String,
         nickname: String,
         image: String,
-        type: String,
+        type: [String],
         catchDate: Date
     ) {
         self.catchId = catchId

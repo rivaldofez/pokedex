@@ -151,6 +151,4 @@ public struct PokemonTransformer: Mapper {
         
         return pokemonEntity
     }
-    
-    
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 class AboutTableViewCell: UITableViewCell {
-    static let identifier = "AboutTableViewCell"
+    static let identifier = String(describing: AboutTableViewCell.self)
     
     private let titleLabel: UILabel = {
         let label = UILabel()

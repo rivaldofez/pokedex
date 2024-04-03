@@ -59,7 +59,7 @@ class HomeViewController: UIViewController, HomeViewProtocol {
     // Error View
     private lazy var errorLabel: UILabel = {
         let label = UILabel()
-        label.text = "msg.error.load.pokemon".localized(bundle: commonBundle)
+        label.text = "msg.error.load.pokemon".localized()
         label.textColor = .label
         label.font = .poppinsBold(size: 16)
         label.textAlignment = .center
@@ -77,7 +77,7 @@ class HomeViewController: UIViewController, HomeViewProtocol {
     }()
     
     private lazy var retryButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setImage(UIImage(systemName: "arrow.clockwise"), for: .normal)
         button.tintColor = .label
         button.addTarget(self, action: #selector(reloadData), for: .touchUpInside)

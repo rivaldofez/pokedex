@@ -9,11 +9,10 @@ import UIKit
 
 class MovesTableViewCell: UITableViewCell {
     
-    static let identifier = "MovesTableViewCell"
+    static let identifier = String(describing: MovesTableViewCell.self)
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Razor Leaf"
         label.font = .comfortaaRegular(size: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

@@ -60,7 +60,7 @@ class BaseStatSubViewController: UIViewController {
     
     private let chartSwitchLabel: UILabel = {
         let label = UILabel()
-        label.text = "title.radar.view".localized(bundle: commonBundle)
+        label.text = "title.radar.view".localized()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

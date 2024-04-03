@@ -10,43 +10,28 @@ import Lottie
 import GeneralPokemon
 import SpeciesPokemon
 import Common
+import SDWebImage
 
 protocol DetailPokemonViewProtocol {
     var presenter: DetailPokemonPresenterProtocol? { get set }
     
     func updatePokemonSpecies(with pokemonSpecies: PokemonSpeciesDomainModel)
     func updatePokemonSpecies(with error: String)
-    func updatePokemon(with pokemon: PokemonDomainModel)
-    func updateSaveToggleFavorite(with error: String)
-    func updateSaveToggleFavorite(with state: Bool)
+    func updatePokemon(with pokemon: PokemonDomainModel, nickname: String?)
+    func updatePutCatchPokemonResult(with error: String)
+    func updatePutCatchPokemonResult(with state: Bool)
     func isLoadingData(with state: Bool)
 }
 
 class DetailPokemonViewController:
     UIViewController, DetailPokemonViewProtocol {
     
-    private func showToggleFavoriteAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "OK", style: .default)
-        
-        // For UI Testing
-        okButton.accessibilityIdentifier = "okButton"
-        alert.view.accessibilityIdentifier = "favoriteAlert"
-        
-        alert.addAction(okButton)
-        self.present(alert, animated: true)
+    func updatePutCatchPokemonResult(with error: String) {
+        showCommonAlert(title: "title.error.occured".localized(), message: "msg.error.process.request".localized())
     }
     
-    func updateSaveToggleFavorite(with error: String) {
-        showToggleFavoriteAlert(title: "title.error.occured".localized(bundle: commonBundle), message: "msg.error.process.request".localized(bundle: commonBundle))
-    }
-    
-    func updateSaveToggleFavorite(with state: Bool) {
-        if state {
-            showToggleFavoriteAlert(title: "title.add.favorite".localized(bundle: commonBundle), message: "msg.success.added.favorite".localized(bundle: commonBundle))
-        } else {
-            showToggleFavoriteAlert(title: "title.remove.favorite".localized(bundle: commonBundle), message: "msg.success.removed.favorite".localized(bundle: commonBundle))
-        }
+    func updatePutCatchPokemonResult(with state: Bool) {
+        showCommonAlert(title: state ? "title.hooray".localized() : "title.ooops".localized(), message: state ? "msg.pokemon.caught.sent".localized() : "msg.pokemon.caught.not.sent".localized())
     }
     
     var presenter: DetailPokemonPresenterProtocol?
@@ -61,7 +46,14 @@ class DetailPokemonViewController:
         showError(isError: false)
     }
     
-    func updatePokemon(with pokemon: PokemonDomainModel) {
+    func updatePokemon(with pokemon: PokemonDomainModel, nickname: String?) {
+        if nickname == nil {
+            pokemonNickNameLabel.isHidden = true
+        } else {
+            pokemonNickNameLabel.isHidden = false
+            pokemonNickNameLabel.text = nickname
+        }
+        
         self.pokemon = pokemon
         
         aboutSubViewController.pokemon = pokemon
@@ -78,7 +70,6 @@ class DetailPokemonViewController:
         
         indicator.backgroundColor = UIColor(named: ViewDataConverter.typeStringToColorName(type: pokemon.type.first!))
         showError(isError: false)
-        showFavoriteButton(isFavorite: pokemon.isFavorite)
     }
     
     func isLoadingData(with state: Bool) {
@@ -179,9 +170,19 @@ class DetailPokemonViewController:
     private let pokemonImageView: UIImageView = {
         let imageview = UIImageView()
         imageview.translatesAutoresizingMaskIntoConstraints = false
-        imageview.image = UIImage(named: "charizard")
         imageview.contentMode = .scaleAspectFit
+        imageview.sd_imageIndicator = SDWebImageActivityIndicator.gray
         return imageview
+    }()
+    
+    private let pokemonNickNameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .secondaryLabel
+        label.font = .poppinsBold(size: 12)
+        label.textAlignment = .left
+        
+        return label
     }()
     
     // Loading View
@@ -203,7 +204,6 @@ class DetailPokemonViewController:
     // Error View
     private lazy var errorLabel: UILabel = {
         let label = UILabel()
-        label.text = "Error occured while load pokemon data"
         label.textColor = .label
         label.font = .poppinsBold(size: 16)
         label.textAlignment = .center
@@ -237,14 +237,9 @@ class DetailPokemonViewController:
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .label
         
-//        let attrs = [
-//            NSAttributedString.Key.font: UIFont.poppinsBold(size: 34)
-//        ]
-//        
-//        navigationController?.navigationBar.largeTitleTextAttributes = attrs as [NSAttributedString.Key: Any]
-        
         view.addSubview(pokemonTypeStackView)
         view.addSubview(pokemonImageView)
+        view.addSubview(pokemonNickNameLabel)
         view.addSubview(sectionStackView)
         view.addSubview(indicator)
         view.addSubview(sectionViewContainer)
@@ -255,6 +250,7 @@ class DetailPokemonViewController:
         
         configureConstraints()
         configureStackButton()
+        setCatchButton()
     }
     
     override func viewDidLayoutSubviews() {
@@ -285,9 +281,15 @@ class DetailPokemonViewController:
     // MARK: Auto Layout Constraints
     private func configureConstraints() {
         let pokemonImageViewConstraints = [
-            pokemonImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            pokemonImageView.topAnchor.constraint(equalTo: pokemonNickNameLabel.bottomAnchor, constant: 8),
             pokemonImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pokemonImageView.heightAnchor.constraint(equalToConstant: min(view.frame.width/2, view.frame.height/2))
+        ]
+        
+        let pokemonNickNameLabelConstraints = [
+            pokemonNickNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 2),
+            pokemonNickNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            pokemonNickNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ]
         
         let pokemonTypeStackViewConstraints = [
@@ -338,6 +340,7 @@ class DetailPokemonViewController:
         ]
         
         NSLayoutConstraint.activate(pokemonImageViewConstraints)
+        NSLayoutConstraint.activate(pokemonNickNameLabelConstraints)
         NSLayoutConstraint.activate(pokemonTypeStackViewConstraints)
         NSLayoutConstraint.activate(sectionStackViewConstraints)
         NSLayoutConstraint.activate(indicatorConstraints)
@@ -382,38 +385,43 @@ class DetailPokemonViewController:
         return stackView
     }
     
-    private func showFavoriteButton(isFavorite: Bool) {
-        if self.navigationItem.rightBarButtonItem == nil {
-            let button = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoriteAction))
-            button.accessibilityIdentifier = "favoriteButton"
-            
-            if isFavorite {
-                button.image = UIImage(systemName: "heart.fill")
-                button.tintColor = UIColor.red
-            } else {
-                button.image = UIImage(systemName: "heart")
-                button.tintColor = UIColor.gray
-            }
-            
-            navigationItem.rightBarButtonItem = button
-            
+    private func setCatchButton() {
+        let button = UIBarButtonItem(image: UIImage(named: "icon_pokeball"), style: .plain, target: self, action: #selector(catchAction))
+        
+        navigationItem.rightBarButtonItem = button
+        
+    }
+    
+    @objc private func catchAction() {
+        guard let presenter = presenter else { return }
+        if(presenter.catchProbState()) {
+            showNicknameAlert()
         } else {
-            if isFavorite {
-                self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart.fill")
-                self.navigationItem.rightBarButtonItem?.tintColor = UIColor.red
-            } else {
-                self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart")
-                self.navigationItem.rightBarButtonItem?.tintColor = UIColor.gray
-            }
+            showCommonAlert(title: "title.ooops".localized(), message: "msg.pokemon.missed.run".localized())
         }
     }
     
-    @objc private func favoriteAction() {
-        pokemon?.isFavorite.toggle()
-        if let pokemon = self.pokemon {
-            showFavoriteButton(isFavorite: pokemon.isFavorite)
-            presenter?.saveToggleFavorite(pokemon: pokemon)
+    private func showCommonAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "title.ok".localized(), style: .default)
+        
+        alert.addAction(okButton)
+        self.present(alert, animated: true)
+    }
+    
+    
+    private func showNicknameAlert() {
+        let alert = UIAlertController(title: "title.gotcha".localized(), message: "msg.choose.new.nickname".localized(), preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = self.pokemon?.name
         }
+        alert.addAction(UIAlertAction(title: "title.ok".localized(), style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0]
+            self.presenter?.putCatchedPokemon(pokemon: self.pokemon!, nickname: textField?.text ?? "")
+            
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @objc private func didTapTab(_ sender: UIButton) {

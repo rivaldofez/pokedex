@@ -11,51 +11,34 @@ import GeneralPokemon
 import SpeciesPokemon
 import Common
 import RxSwift
+import CatchPokemon
 
 protocol DetailPokemonPresenterProtocol {
     var router: DetailPokemonRouterProtocol? { get set}
     
-    var speciesInteractor: Interactor<
-        Int,
-        PokemonSpeciesDomainModel?,
-        GetPokemonSpeciesRepository<
-            PokemonSpeciesLocaleDataSource,
-            PokemonSpeciesRemoteDataSource,
-            PokemonSpeciesTransformer>>? { get set }
-    
-//    var toggleFavoriteInteractor: Interactor<
-//        PokemonDomainModel,
-//        Bool,
-//        ToggleFavoritePokemonRepository<
-//            PokemonLocaleDataSource,
-//            PokemonTransformer>>? { get set }
-    
-    var pokemonInteractor: Interactor<
-        Int,
-        PokemonDomainModel,
-        GetPokemonRepository<
-            PokemonLocaleDataSource,
-            PokemonTransformer>>? { get set }
+    var speciesInteractor: PokemonSpeciesInteractor? { get set }
+    var putCatchPokemonInteractor: PutCatchPokemonInteractor? { get set }
+    var pokemonInteractor: PokemonInteractor? { get set }
     
     var view: DetailPokemonViewProtocol? { get set }
     
     var isLoadingData: Bool { get set}
-    
     func getPokemonSpecies(id: Int)
-    func getPokemon(with pokemon: PokemonDomainModel)
-    func saveToggleFavorite(pokemon: PokemonDomainModel)
+    func getPokemon(with pokemon: PokemonDomainModel, nickname: String?)
+    func putCatchedPokemon(pokemon: PokemonDomainModel, nickname: String)
+    func catchProbState() -> Bool
 }
 
 class DetailPokemonPresenter: DetailPokemonPresenterProtocol {
-    var pokemonInteractor: Interactor<Int, PokemonDomainModel, GetPokemonRepository<PokemonLocaleDataSource, PokemonTransformer>>?
+    var putCatchPokemonInteractor: PutCatchPokemonInteractor?
     
-//    var toggleFavoriteInteractor: Interactor<PokemonDomainModel, Bool, ToggleFavoritePokemonRepository<PokemonLocaleDataSource, PokemonTransformer>>?
+    var pokemonInteractor: Interactor<Int, PokemonDomainModel, GetPokemonRepository<PokemonLocaleDataSource, PokemonTransformer>>?
     
     private let disposeBag = DisposeBag()
     
     var router: DetailPokemonRouterProtocol?
     
-    var speciesInteractor: Core.Interactor<Int, SpeciesPokemon.PokemonSpeciesDomainModel?, SpeciesPokemon.GetPokemonSpeciesRepository<SpeciesPokemon.PokemonSpeciesLocaleDataSource, SpeciesPokemon.PokemonSpeciesRemoteDataSource, SpeciesPokemon.PokemonSpeciesTransformer>>?
+    var speciesInteractor: PokemonSpeciesInteractor?
     
     var view: DetailPokemonViewProtocol?
     
@@ -74,7 +57,7 @@ class DetailPokemonPresenter: DetailPokemonPresenterProtocol {
                 if let pokemonSpecies = pokemonSpeciesResult {
                     self?.view?.updatePokemonSpecies(with: pokemonSpecies)
                 } else {
-                    self?.view?.updatePokemonSpecies(with: "msg.error.retrieve.detail.pokemon".localized(bundle: commonBundle))
+                    self?.view?.updatePokemonSpecies(with: "msg.error.retrieve.detail.pokemon".localized())
                 }
             } onError: { error in
                 self.view?.updatePokemonSpecies(with: error.localizedDescription)
@@ -84,31 +67,30 @@ class DetailPokemonPresenter: DetailPokemonPresenterProtocol {
         
     }
     
-    func getPokemon(with pokemon: PokemonDomainModel) {
+    func getPokemon(with pokemon: PokemonDomainModel, nickname: String?) {
         isLoadingData = true
+        self.view?.updatePokemon(with: pokemon, nickname: nickname)
+        self.getPokemonSpecies(id: pokemon.id)
+    }
+    
+    func putCatchedPokemon(pokemon: PokemonDomainModel, nickname: String) {
+        self.isLoadingData = true
         
-        pokemonInteractor?.execute(request: pokemon.id)
+        let catchModel = CatchPokemonDomainModel(catchId: UUID().uuidString, id: pokemon.id, name: pokemon.name, nickname: nickname.isEmpty ? pokemon.name.capitalized : nickname, image: pokemon.image, type: pokemon.type, catchDate: Date())
+        
+        putCatchPokemonInteractor?.execute(request: catchModel)
             .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] pokemonResult in
-                self?.view?.updatePokemon(with: pokemonResult)
-            } onError: { _ in
-                self.view?.updatePokemon(with: pokemon)
-                self.getPokemonSpecies(id: pokemon.id)
+            .subscribe { [weak self] state in
+                self?.view?.updatePutCatchPokemonResult(with: state)
+            } onError: { error in
+                self.view?.updatePutCatchPokemonResult(with: error.localizedDescription)
             } onCompleted: {
-                self.getPokemonSpecies(id: pokemon.id)
+                self.isLoadingData = false
             }.disposed(by: disposeBag)
     }
     
-    func saveToggleFavorite(pokemon: PokemonDomainModel) {
-        self.isLoadingData = true
-//        toggleFavoriteInteractor?.execute(request: pokemon)
-//            .observe(on: MainScheduler.instance)
-//            .subscribe { [weak self] _ in
-//                self?.view?.updateSaveToggleFavorite(with: pokemon.isFavorite)
-//            } onError: { error in
-//                self.view?.updateSaveToggleFavorite(with: error.localizedDescription)
-//            } onCompleted: {
-//                self.isLoadingData = false
-//            }.disposed(by: disposeBag)
+    func catchProbState() -> Bool {
+        let rand = Double.random(in: 0..<1)
+        return rand < 0.5
     }
 }

@@ -1,0 +1,42 @@
+/*
+  Localizable.strings
+  Pokedex
+
+  Created by rivaldo on 03/04/24.
+  
+*/
+
+"title.pokemon" = "Pokemon";
+"title.my.pokemon" = "Pokemon Ku";
+"title.error.occured" = "Terjadi Kesalahan";
+"title.release.pokemon.success" = "Pokemon Dilepas";
+"title.release.pokemon.failed" = "Pokemon Tidak Dilepaskan";
+"title.edit.nickname.pokemon.success" = "Nama Panggilan Berubah";
+"title.edit.nickname.pokemon.failed" = "Nama Panggilan Tidak Berubah";
+"title.ok" = "OK";
+"title.edit" = "Ubah";
+"title.nickname" = "Nama Panggilan";
+"title.change" = "Ubah";
+"title.cancel" = "Batal";
+"title.release" = "Lepas";
+"title.hooray" = "Hooray~";
+"title.ooops" = "Ooops!";
+"title.gotcha" = "Gotcha!";
+"title.radar.view" = "Mode Radar";
+
+
+"msg.success.released.pokemon" = "Bye-bye teman, maaf kamu harus dilepas, sampai jumpa lagi :)";
+"msg.failed.released.pokemon" = "Oops, pokemon kamu sepertinya tidak ingin lepas :(, it's okay, mohon coba lagi nanti";
+"msg.success.edit.nickname.pokemon" = "Wohoo, pokemon kamu terlihat sangat sendang dengan nama panggilan baru";
+"msg.failed.edit.nickname.pokemon" = "Oops, pokemon kamu nampak tidak suka dengan nama panggilan baru, dan ia memilih menggunakan nama lama";
+"msg.empty.my.pokemon.list" = "Oops, kamu belum menangkap seekor pokemon pun, mulailah menangkap pokemon sekarang.";
+
+
+"msg.error.load.pokemon" = "Terjadi kesalahan saat memuat data pokemon";
+"msg.error.process.request" = "Terjadi kesalahan saat memproses permintaanmu, silakan coba lagi";
+"msg.choose.new.nickname" = "Pilih nama panggilan pokemon mu yang baru";
+"msg.pokemon.caught.sent" = "Pokemon kamu sudah dikirimkan ke center, kamu bisa lihat di halaman Pokemon Saya";
+"msg.pokemon.caught.not.sent" = "Terjadi kesalahan saat mengirimkan pokemon mu, silakan coba lagi";
+"msg.pokemon.missed.run" = "Kamu meleset!, pokemonnya lari, silakan coba tangkap lagi.";
+
+

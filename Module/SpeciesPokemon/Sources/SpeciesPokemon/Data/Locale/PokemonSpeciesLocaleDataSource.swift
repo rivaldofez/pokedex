@@ -83,7 +83,7 @@ public struct PokemonSpeciesLocaleDataSource: LocaleDataSource {
         }
     }
     
-    public func update(entity: PokemonSpeciesEntity) -> RxSwift.Observable<Bool> {
+    public func update(entity: PokemonSpeciesEntity) -> Observable<Bool> {
         return Observable<Bool>.create { observer in
             do {
                 try _realm.write {
@@ -95,6 +95,30 @@ public struct PokemonSpeciesLocaleDataSource: LocaleDataSource {
                 observer.onError(DatabaseError.invalidInstance)
             }
             
+            return Disposables.create()
+        }
+    }
+    
+    public func delete(entity: PokemonSpeciesEntity) -> Observable<Bool> {
+        let id = entity.id
+        let pokeRes = _realm.object(ofType: PokemonSpeciesEntity.self,
+                                   forPrimaryKey: id)
+        
+        return Observable<Bool>.create { observer in
+            if let pokeRes = pokeRes {
+                do {
+                    try _realm.write {
+                        _realm.delete(pokeRes)
+                    }
+                    observer.onNext(true)
+                    observer.onCompleted()
+                } catch {
+                    observer.onError(DatabaseError.invalidInstance)
+                }
+            } else {
+                observer.onNext(false)
+                observer.onCompleted()
+            }
             return Disposables.create()
         }
     }

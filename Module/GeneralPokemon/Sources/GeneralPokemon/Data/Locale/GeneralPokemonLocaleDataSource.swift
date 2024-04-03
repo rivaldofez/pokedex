@@ -11,8 +11,6 @@ import RealmSwift
 import RxSwift
 
 public struct PokemonLocaleDataSource: LocaleDataSource {
-
-    
     public typealias Request = Int
     
     public typealias Response = PokemonEntity
@@ -98,6 +96,30 @@ public struct PokemonLocaleDataSource: LocaleDataSource {
                 observer.onError(DatabaseError.invalidInstance)
             }
             
+            return Disposables.create()
+        }
+    }
+    
+    public func delete(entity: PokemonEntity) -> RxSwift.Observable<Bool> {
+        let id = entity.id
+        let pokeRes = _realm.object(ofType: PokemonEntity.self,
+                                   forPrimaryKey: id)
+        
+        return Observable<Bool>.create { observer in
+            if let pokeRes = pokeRes {
+                do {
+                    try _realm.write {
+                        _realm.delete(pokeRes)
+                    }
+                    observer.onNext(true)
+                    observer.onCompleted()
+                } catch {
+                    observer.onError(DatabaseError.invalidInstance)
+                }
+            } else {
+                observer.onNext(false)
+                observer.onCompleted()
+            }
             return Disposables.create()
         }
     }
