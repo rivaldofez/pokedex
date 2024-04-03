@@ -32,7 +32,7 @@ public struct CatchPokemonLocaleDataSource: LocaleDataSource {
                 if request.isEmpty {
                     observer.onNext(pokeData.toArray(ofType: CatchPokemonEntity.self))
                 } else {
-                    let filteredData = pokeData.where { $0.name.contains(request, options: .caseInsensitive )}
+                    let filteredData = pokeData.where { $0.nickname.contains(request, options: .caseInsensitive )}
                     
                     observer.onNext(filteredData.toArray(ofType: CatchPokemonEntity.self))
                 }
